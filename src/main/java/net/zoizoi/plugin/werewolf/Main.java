@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 public final class Main extends JavaPlugin {
-  FileConfiguration config;
+  public FileConfiguration config;
 
   @Override
   public void onEnable() {
@@ -25,7 +25,7 @@ public final class Main extends JavaPlugin {
     config = getConfig();
 
     getLogger().info("WereWolf Pluginが読み込まれました");
-    getCommand("wolf").setExecutor(new CommandMaster());
+    getCommand("wolf").setExecutor(new CommandMaster(this));
     getCommand("wolf").setTabCompleter(this);
   }
 
