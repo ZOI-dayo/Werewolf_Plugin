@@ -20,7 +20,7 @@ DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b
 
 - op : /wolf_host
 - チャット(global) : 人狼ゲームの募集が開始されました ここを押して参加
-- 画面(global) : 「人狼ゲームの募集が開始されました」「/wolf_join で参加」
+- 画面(global) : 「人狼ゲームの募集が開始されました」「/wolf join で参加」
 
 
 
