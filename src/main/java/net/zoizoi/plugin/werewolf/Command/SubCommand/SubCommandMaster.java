@@ -20,6 +20,7 @@ public class SubCommandMaster {
   public boolean OnCommand(Player player, Command command, String label, String[] args) {
     if (args[0].equals("host")) {
       GameID = gameManager.AddGame();
+      player.sendMessage("" + GameID);
       player.sendMessage("人狼ゲームの募集を開始しました");
       World world = player.getWorld();
       for (Player p : world.getPlayers()) {
@@ -31,7 +32,9 @@ public class SubCommandMaster {
       }
       return true;
     } else if (args[0].equals("join")) {
+      player.sendMessage("人狼ゲームに参加しましたあああaaa");
       if (!gameManager.getGame(GameID).isReady) {
+        player.sendMessage("人狼ゲームに参加しましたあああ");
         gameManager.getGame(GameID).AddPlayer(player);
         player.sendMessage("人狼ゲームに参加しました");
         TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");
@@ -59,16 +62,20 @@ public class SubCommandMaster {
         player.sendMessage("ゲームが開始されているので離脱できません");
       }
     } else if (args[0].equals("ready")) {
-      gameManager.getGame(GameID).isReady = true;
-      World world = player.getWorld();
-      for (Player p : world.getPlayers()) {
-        if (p != player) {
-          p.sendTitle("人狼ゲームの募集が締め切られました", "", 10, 50, 10);
-          p.sendMessage("人狼ゲームの募集が締め切られました");
-        } else {
-          p.sendTitle("ゲームの準備をしています", "", 10, 50, 10);
-          p.sendMessage("ゲームの準備をしています");
+      if (!gameManager.getGame(GameID).isReady) {
+        gameManager.getGame(GameID).isReady = true;
+        World world = player.getWorld();
+        for (Player p : world.getPlayers()) {
+          if (p != player) {
+            p.sendTitle("人狼ゲームの募集が締め切られました", "", 10, 50, 10);
+            p.sendMessage("人狼ゲームの募集が締め切られました");
+          } else {
+            p.sendTitle("ゲームの準備をしています", "", 10, 50, 10);
+            p.sendMessage("ゲームの準備をしています");
+          }
         }
+      } else {
+        player.sendMessage("ゲームはすでに準備されています");
       }
     } else if (args[0].equals("start")) {
       gameManager.getGame(GameID).Start(plugin);
