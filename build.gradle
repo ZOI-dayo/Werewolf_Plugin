@@ -30,3 +30,5 @@ processResources {
         filter ReplaceTokens, tokens: [version: version]
     }
 }
+
+tasks.withType(AbstractCompile)*.options*.encoding = tasks.withType(GroovyCompile)*.groovyOptions*.encoding = 'UTF-8'

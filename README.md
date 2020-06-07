@@ -12,6 +12,10 @@ DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b
 
 - ログ : WereWolf Pluginが読み込まれました
 
+
+
+- Discord Bot 起動
+
 ### 募集時
 
 - op : /wolf_host
@@ -24,6 +28,7 @@ DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b
 
 ### 参加時
 
+- Player : /wolf join
 - チャット(private) : ゲームに参加しました。
 - 画面(private) : 「ゲームに参加しました」「ゲームの開始を待ってください」
 
@@ -46,6 +51,7 @@ DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b
 
 
 - フィールドにtp
+- スコアボード(n人)
 
 ### 開始時
 
@@ -62,6 +68,10 @@ DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b
 - 無敵時間10秒(bossbar)
 - scoreboad追加
 
+### JobEvent時
+
+- /wolf job
+
 ### デス時
 
 - チャット(private) : あなたは死亡しました
@@ -77,3 +87,11 @@ DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b
 
 
 - ジャッジ判定
+
+### リセット時
+
+- /wolf reset
+
+### 終了時
+
+- 全員スペクテーターモード
