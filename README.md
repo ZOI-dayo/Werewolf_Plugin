@@ -8,6 +8,10 @@
 
 DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b2
 
+### プラグイン読み込み時
+
+- ログ : WereWolf Pluginが読み込まれました
+
 ### 募集時
 
 - op : /wolf_host
