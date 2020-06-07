@@ -1,0 +1,6 @@
+name: WereWolf
+version: @version@
+main: net.zoizoi.plugin.werewolf.Main
+api-version: 1.13
+authors: [ZOI]
+description: WereWolf Minigame Plugin
