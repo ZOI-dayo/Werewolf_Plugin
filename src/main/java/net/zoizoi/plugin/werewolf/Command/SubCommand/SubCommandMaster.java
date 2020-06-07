@@ -1,5 +1,6 @@
 package net.zoizoi.plugin.werewolf.Command.SubCommand;
 
+import net.zoizoi.plugin.werewolf.Game.Game;
 import net.zoizoi.plugin.werewolf.utls.TextUtils;
 import org.bukkit.*;
 import org.bukkit.block.Biome;
@@ -33,14 +34,21 @@ public class SubCommandMaster {
       World world = player.getWorld();
       for (Player p : world.getPlayers()) {
         if (p != player) {
-          p.sendTitle("人狼ゲームに参加できます", "/wolf join で参加", 10, 25, 10);
+          p.sendTitle("人狼ゲームに参加できます", "/wolf join で参加", 10, 50, 10);
           p.sendMessage("人狼ゲームの募集が開始されました");
-          TextUtils.sendHoverText(p, "このメッセージを押して参加", "人狼ゲームに参加する", "/wolf join");
+          TextUtils.sendHoverText(p, ChatColor.RED + "＞＞＞このメッセージを押して参加＜＜＜", "人狼ゲームに参加する", "/wolf join");
         }
       }
       return true;
     } else if (args[0].equals("join")) {
+      player.sendMessage("人狼ゲームに参加しました");
+      TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");
+      player.setPlayerListName(ChatColor.RED + player.getName());
       return true;
+    } else if (args[0].equals("cancel")) {
+      player.sendMessage("人狼ゲームから離脱しました");
+      TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞再参加する場合はこちら＜＜＜", "人狼ゲームに参加する", "/wolf join");
+      player.setPlayerListName(player.getName());
     }
 
     getLogger().info("ehwuf");
