@@ -16,16 +16,26 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
-    jcenter() //This prevents issues with transitive dependencies
+    jcenter()
+    google()
     maven {
-        url  "https://jitpack.io"
+        url "https://maven.springframework.org/release"
+    }
+    maven {
+        url "https://maven.restlet.com"
     }
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compileOnly 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
-    compile "com.github.austinv11:Discord4J:@VERSION@"
+    // https://mvnrepository.com/artifact/net.dv8tion/JDA
+    // compile group: 'net.dv8tion', name: 'JDA', version: '4.1.1_143'
+    // https://mvnrepository.com/artifact/com.jagrosh/jda-utilities
+    // compile group: 'com.jagrosh', name: 'jda-utilities', version: '3.0.3'// , ext: 'pom'
+    // implementation 'org.javacord:javacord:3.0.6'
+
+
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens

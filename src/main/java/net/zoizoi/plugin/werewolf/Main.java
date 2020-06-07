@@ -4,21 +4,29 @@ import net.zoizoi.plugin.werewolf.Command.CommandMaster;
 import net.zoizoi.plugin.werewolf.Command.CommandTabComplete;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public final class Main extends JavaPlugin {
+  FileConfiguration config;
 
   @Override
   public void onEnable() {
     // Plugin startup logic
+    // config.ymlが存在しない場合はファイルに出力します。
+    saveDefaultConfig();
+    // config.ymlを読み込みます。
+    config = getConfig();
+
     getLogger().info("WereWolf Pluginが読み込まれました");
     getCommand("wolf").setExecutor(new CommandMaster());
-    // getCommand("wolf").setTabCompleter(new CommandTabComplete());
+    getCommand("wolf").setTabCompleter(this);
   }
 
   @Override
@@ -32,20 +40,23 @@ public final class Main extends JavaPlugin {
     if (!command.getName().equalsIgnoreCase("wolf")) {
       return super.onTabComplete(sender, command, alias, args);
     }
-    getLogger().info("a。");
     if (args.length == 1) {
-      getLogger().info("b。");
+      List<String> commands = new ArrayList<>(Arrays.asList("host", "join", "cancel", "ready", "start", "job"));
+      List<String> Answer = new ArrayList<>();
       if (args[0].length() == 0) { // /wolfまで
-        return Arrays.asList("host");
+        return commands;
       } else {
         //入力されている文字列と先頭一致
-        if ("host".startsWith(args[0])) {
-          return Collections.singletonList("hoge");
+        for (String S : commands) {
+          if (S.startsWith(args[0])) {
+            Answer.add(S);
+          }
         }
+        return Answer;
       }
-      return new ArrayList<>();
     }
     //JavaPlugin#onTabComplete()を呼び出す
     return super.onTabComplete(sender, command, alias, args);
   }
 }
+

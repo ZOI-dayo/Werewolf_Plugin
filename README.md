@@ -18,7 +18,7 @@ DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b
 
 ### 募集時
 
-- op : /wolf_host
+- op : /wolf host
 - チャット(global) : 人狼ゲームの募集が開始されました ここを押して参加
 - 画面(global) : 「人狼ゲームの募集が開始されました」「/wolf join で参加」
 
@@ -42,7 +42,7 @@ DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b
 
 ### 準備時(募集締め切り時)
 
-- op : /wolf_ready
+- op : /wolf ready
 - チャット(global) : 募集が締め切られました
 - チャット(player) : ゲームの準備をしています
 - 画面(global) : 「募集が締め切られました」

@@ -1,0 +1,55 @@
+member:
+  2:
+    Citizen: 1
+    Prophet: 0
+    Necromancer: 0
+    Werewolf: 1
+    Betrayer: 0
+  3:
+    Citizen: 2
+    Prophet: 0
+    Necromancer: 0
+    Werewolf: 1
+    Betrayer: 0
+  4:
+    Citizen: 2
+    Prophet: 1
+    Necromancer: 0
+    Werewolf: 1
+    Betrayer: 0
+  5:
+    Citizen: 2
+    Prophet: 1
+    Necromancer: 0
+    Werewolf: 1
+    Betrayer: 1
+  6:
+    Citizen: 2
+    Prophet: 1
+    Necromancer: 1
+    Werewolf: 2
+    Betrayer: 0
+  7:
+    Citizen: 3
+    Prophet: 1
+    Necromancer: 1
+    Werewolf: 2
+    Betrayer: 0
+  8:
+    Citizen: 3
+    Prophet: 1
+    Necromancer: 1
+    Werewolf: 2
+    Betrayer: 1
+  9:
+    Citizen: 4
+    Prophet: 1
+    Necromancer: 1
+    Werewolf: 3
+    Betrayer: 0
+items:
+  - a
+  - b
+  - c
+colors:
+  ZOIZOI: Green
