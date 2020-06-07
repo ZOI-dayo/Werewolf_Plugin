@@ -19,6 +19,9 @@ public class Game {
   private List<Player> wolfPlayerList = new ArrayList<Player>();
   private List<Player> betrayerPlayerList = new ArrayList<Player>();
 
+  public boolean isReady = false;
+  public boolean isRunning = false;
+
   public Game() {
     Result = "";
   }
@@ -37,6 +40,7 @@ public class Game {
   }
 
   public void Start(Main plugin) {
+    isRunning = true;
     Random random = new Random();
     int randomValue = random.nextInt(10);
     Collections.shuffle(playerList);
@@ -93,5 +97,8 @@ public class Game {
     }else{
       return false;
     }
+  }
+  public void Stop(){
+    isRunning = false;
   }
 }

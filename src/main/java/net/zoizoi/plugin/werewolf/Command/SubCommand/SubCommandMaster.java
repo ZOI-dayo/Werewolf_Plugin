@@ -31,28 +31,48 @@ public class SubCommandMaster {
       }
       return true;
     } else if (args[0].equals("join")) {
-      gameManager.getGame(GameID).AddPlayer(player);
-      player.sendMessage("人狼ゲームに参加しました");
-      TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");
-      player.sendMessage("ゲームの開始を待っています");
-      player.setPlayerListName(ChatColor.RED + player.getName());
-      player.sendTitle("ゲームに参加しました", "ゲームの開始を待っています", 10, 50, 10);
-      player.setGameMode(GameMode.ADVENTURE);
-      Location location = new Location(player.getWorld(),
-        plugin.config.getDouble("Location.Lobby.x"),
-        plugin.config.getDouble("Location.Lobby.y"),
-        plugin.config.getDouble("Location.Lobby.z"));
-      player.teleport(location);
-      return true;
+      if (!gameManager.getGame(GameID).isReady) {
+        gameManager.getGame(GameID).AddPlayer(player);
+        player.sendMessage("人狼ゲームに参加しました");
+        TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");
+        player.sendMessage("ゲームの開始を待っています");
+        player.setPlayerListName(ChatColor.RED + player.getName());
+        player.sendTitle("ゲームに参加しました", "ゲームの開始を待っています", 10, 50, 10);
+        player.setGameMode(GameMode.ADVENTURE);
+        Location location = new Location(player.getWorld(),
+          plugin.config.getDouble("Location.Lobby.x"),
+          plugin.config.getDouble("Location.Lobby.y"),
+          plugin.config.getDouble("Location.Lobby.z"));
+        player.teleport(location);
+        return true;
+      } else {
+        player.sendMessage("ゲームが開始されているので参加できません");
+      }
     } else if (args[0].equals("cancel")) {
-      gameManager.getGame(GameID).DeletePlayer(player);
-      player.sendMessage("人狼ゲームから離脱しました");
-      TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞再参加する場合はこちら＜＜＜", "人狼ゲームに参加する", "/wolf join");
-      player.setPlayerListName(player.getName());
-      return true;
-    }else if(args[0].equals("ready")) {
-    }else if(args[0].equals("start")) {
-    }else if(args[0].equals("job")) {
+      if (!gameManager.getGame(GameID).isReady) {
+        gameManager.getGame(GameID).DeletePlayer(player);
+        player.sendMessage("人狼ゲームから離脱しました");
+        TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞再参加する場合はこちら＜＜＜", "人狼ゲームに参加する", "/wolf join");
+        player.setPlayerListName(player.getName());
+        return true;
+      } else {
+        player.sendMessage("ゲームが開始されているので離脱できません");
+      }
+    } else if (args[0].equals("ready")) {
+      gameManager.getGame(GameID).isReady = true;
+      World world = player.getWorld();
+      for (Player p : world.getPlayers()) {
+        if (p != player) {
+          p.sendTitle("人狼ゲームの募集が締め切られました", "", 10, 50, 10);
+          p.sendMessage("人狼ゲームの募集が締め切られました");
+        } else {
+          p.sendTitle("ゲームの準備をしています", "", 10, 50, 10);
+          p.sendMessage("ゲームの準備をしています");
+        }
+      }
+    } else if (args[0].equals("start")) {
+      gameManager.getGame(GameID).Start(plugin);
+    } else if (args[0].equals("job")) {
     }
     return false;
   }
