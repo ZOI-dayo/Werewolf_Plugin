@@ -7,15 +7,19 @@ import java.util.List;
 
 public class GameManager {
   Main plugin;
+  public boolean isHosted = false;
+
   public GameManager(Main plugin) {
     this.plugin = plugin;
   }
+
   private static List<Game> gameList = new ArrayList<Game>();
   // private Game game;
 
   public int AddGame() {
     // game = new Game();
     gameList.add(new Game(plugin));
+    isHosted = true;
     return gameList.toArray().length - 1;
     // return 0;
   }
@@ -24,7 +28,9 @@ public class GameManager {
     return gameList.get(ID);
     // return game;
   }
+
   public void DeleteGame(int ID) {
     gameList.remove(ID);
+    isHosted = false;
   }
 }

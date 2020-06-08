@@ -1,6 +1,8 @@
 package net.zoizoi.plugin.werewolf;
 
 import net.zoizoi.plugin.werewolf.Command.CommandMaster;
+import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
+import net.zoizoi.plugin.werewolf.Game.Game;
 import net.zoizoi.plugin.werewolf.Game.GameJudge;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -40,9 +42,18 @@ public final class Main extends JavaPlugin {
   public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
     if (!command.getName().equalsIgnoreCase("wolf")) {
       return super.onTabComplete(sender, command, alias, args);
-    }
-    if (args.length == 1) {
+    } else {
       List<String> commands = new ArrayList<>(Arrays.asList("host", "join", "cancel", "ready", "start", "job", "reset", "work"));
+      if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isRunning) { // ゲーム中
+        commands = new ArrayList<>(Arrays.asList("job","reset","work"));
+      } else if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isReady) { // Ready後、ゲーム前
+        commands = new ArrayList<>(Arrays.asList("start","reset"));
+      } else if (SubCommandMaster.gameManager.isHosted) { // Host後、Ready前
+        commands = new ArrayList<>(Arrays.asList("join","cancel","ready"));
+      } else { // Host前
+        commands = new ArrayList<>(Arrays.asList("host"));
+      }
+
       List<String> Answer = new ArrayList<>();
       if (args[0].length() == 0) { // /wolfまで
         return commands;
@@ -56,10 +67,10 @@ public final class Main extends JavaPlugin {
         return Answer;
       } else if (args[2].length() == 0) { // wolf XXX YYY
         return super.onTabComplete(sender, command, alias, args);
+      } else {
+        return new ArrayList<>();
       }
     }
-    //JavaPlugin#onTabComplete()を呼び出す
-    return super.onTabComplete(sender, command, alias, args);
   }
 }
 
