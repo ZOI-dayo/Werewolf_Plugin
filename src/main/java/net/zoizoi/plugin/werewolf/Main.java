@@ -54,23 +54,29 @@ public final class Main extends JavaPlugin {
         } else { // Host前
           commands = new ArrayList<>(Arrays.asList("host"));
         }
-      }else{
+      } else {
         commands = new ArrayList<>(Arrays.asList("host"));
       }
 
       List<String> Answer = new ArrayList<>();
-      if (args[0].length() == 0) { // /wolfまで
-        return commands;
-      } else if (args[1].length() == 0) { // wolf XXX
-        //入力されている文字列と先頭一致
-        for (String S : commands) {
-          if (S.startsWith(args[0])) {
-            Answer.add(S);
+      if (args.length == 1) {
+        if (args[0].length() == 0) { // /wolfまで
+          return commands;
+        } else { // wolf XXX
+          //入力されている文字列と先頭一致
+          for (String S : commands) {
+            if (S.startsWith(args[0])) {
+              Answer.add(S);
+            }
           }
+          return Answer;
         }
-        return Answer;
-      } else if (args[2].length() == 0) { // wolf XXX YYY
-        return super.onTabComplete(sender, command, alias, args);
+      } else if (args.length == 2) { // wolf XXX YYY
+        if (args[0] == "work") {
+          return super.onTabComplete(sender, command, alias, args);
+        }else{
+          return new ArrayList<>();
+        }
       } else {
         return new ArrayList<>();
       }
