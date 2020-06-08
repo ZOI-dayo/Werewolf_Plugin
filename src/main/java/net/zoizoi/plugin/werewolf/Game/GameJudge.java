@@ -29,6 +29,7 @@ public class GameJudge implements Listener {
       gameManager.getGame(GameID).Stop();
       for (Player player : gameManager.getGame(GameID).getPlayers().keySet()) {
         player.setGameMode(GameMode.SPECTATOR);
+        plugin.getLogger().info(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()));
         player.sendTitle(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);
         player.sendMessage("+-----------+");
         player.sendMessage("| "+plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利 |");

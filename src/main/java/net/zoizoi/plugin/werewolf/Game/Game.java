@@ -107,17 +107,23 @@ public class Game {
   }
 
   public boolean PlayerDie(GamePlayer gamePlayer) {
+    plugin.getLogger().info(gamePlayer.getJob().getJobName());
+    plugin.getLogger().info("" + villagePlayerList.size());
+    plugin.getLogger().info("" + wolfPlayerList.size());
     gamePlayer.setLife(false);
     switch (gamePlayer.getJob().getJobName()) {
       case "Citizen":
       case "Prophet":
       case "Necromancer":
+        plugin.getLogger().info("villagePlayerList.remove(gamePlayer);");
         villagePlayerList.remove(gamePlayer);
         break;
       case "Werewolf":
+        plugin.getLogger().info("wolfPlayerList.remove(gamePlayer);");
         wolfPlayerList.remove(gamePlayer);
         break;
       case "Betrayer":
+        plugin.getLogger().info("betrayerPlayerList.remove(gamePlayer)");
         betrayerPlayerList.remove(gamePlayer);
         break;
       default:
@@ -137,7 +143,8 @@ public class Game {
   public void Stop() {
     isRunning = false;
   }
-  public String getResult(){
+
+  public String getResult() {
     return Result;
   }
 }

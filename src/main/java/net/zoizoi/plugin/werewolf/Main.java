@@ -44,13 +44,17 @@ public final class Main extends JavaPlugin {
       return super.onTabComplete(sender, command, alias, args);
     } else {
       List<String> commands = new ArrayList<>(Arrays.asList("host", "join", "cancel", "ready", "start", "job", "reset", "work"));
-      if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isRunning) { // ゲーム中
-        commands = new ArrayList<>(Arrays.asList("job","reset","work"));
-      } else if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isReady) { // Ready後、ゲーム前
-        commands = new ArrayList<>(Arrays.asList("start","reset"));
-      } else if (SubCommandMaster.gameManager.isHosted) { // Host後、Ready前
-        commands = new ArrayList<>(Arrays.asList("join","cancel","ready"));
-      } else { // Host前
+      if (SubCommandMaster.gameManager.isHosted) {
+        if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isRunning) { // ゲーム中
+          commands = new ArrayList<>(Arrays.asList("job", "reset", "work"));
+        } else if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isReady) { // Ready後、ゲーム前
+          commands = new ArrayList<>(Arrays.asList("start", "reset"));
+        } else if (SubCommandMaster.gameManager.isHosted) { // Host後、Ready前
+          commands = new ArrayList<>(Arrays.asList("join", "cancel", "ready"));
+        } else { // Host前
+          commands = new ArrayList<>(Arrays.asList("host"));
+        }
+      }else{
         commands = new ArrayList<>(Arrays.asList("host"));
       }
 

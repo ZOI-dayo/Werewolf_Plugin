@@ -11,10 +11,12 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import java.util.Objects;
+
 public class SubCommandMaster {
   public static Main plugin;
   public static GameManager gameManager = new GameManager(plugin);
-  public static int GameID;
+  public static int GameID = 0;
 
   public SubCommandMaster(Main plugin) {
     this.plugin = plugin;
@@ -110,12 +112,20 @@ public class SubCommandMaster {
       for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
         if (p.equals(player)) {
           player.sendMessage("あなたの役職は " + gameManager.getGame(GameID).getPlayers().get(p).getJob().getJobNameJapanese() + " です");
+          player.sendMessage(Objects.requireNonNull(plugin.config.getString("japanese.jobsExp." + gameManager.getGame(GameID).getPlayers().get(p).getJob().getJobName())));
         }
       }
       return true;
     } else if (args[0].equals("reset")) {
       gameManager.DeleteGame(GameID);
       player.sendMessage("ゲームを消去しました");
+      for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+        Location quitLobby = new Location(player.getWorld(),
+          plugin.config.getDouble("Location.quitLobby.x"),
+          plugin.config.getDouble("Location.quitLobby.y"),
+          plugin.config.getDouble("Location.quitLobby.z"));
+        p.teleport(quitLobby);
+      }
       return true;
     } else if (args[0].equals("work")) {
       if (args.length < 2) {
