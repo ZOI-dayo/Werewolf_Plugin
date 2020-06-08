@@ -102,31 +102,34 @@ public class Game {
         shuffledPlayerList.get(i).sendMessage("あなたは 狂人 です");
         villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
       }
-
+      for (Player p : playerList.keySet())
+        plugin.getLogger().info("Name = " + p.getName());
     }
   }
 
-  public boolean PlayerDie(GamePlayer gamePlayer) {
-    plugin.getLogger().info(gamePlayer.getJob().getJobName());
-    plugin.getLogger().info("" + villagePlayerList.size());
-    plugin.getLogger().info("" + wolfPlayerList.size());
+  public boolean PlayerDie(Player player) {
+    GamePlayer gamePlayer = playerList.get(player);
+    plugin.getLogger().info("110: " + gamePlayer/*.getJob().getJobName()*/);
+    plugin.getLogger().info("111: " + villagePlayerList.size());
+    plugin.getLogger().info("112: " + wolfPlayerList.size());
     gamePlayer.setLife(false);
     switch (gamePlayer.getJob().getJobName()) {
       case "Citizen":
       case "Prophet":
       case "Necromancer":
-        plugin.getLogger().info("villagePlayerList.remove(gamePlayer);");
-        villagePlayerList.remove(gamePlayer);
+        plugin.getLogger().info("118: villagePlayerList.remove(gamePlayer);");
+        villagePlayerList.remove(player);
         break;
       case "Werewolf":
-        plugin.getLogger().info("wolfPlayerList.remove(gamePlayer);");
-        wolfPlayerList.remove(gamePlayer);
+        plugin.getLogger().info("122: wolfPlayerList.remove(gamePlayer);");
+        wolfPlayerList.remove(player);
         break;
       case "Betrayer":
-        plugin.getLogger().info("betrayerPlayerList.remove(gamePlayer)");
-        betrayerPlayerList.remove(gamePlayer);
+        plugin.getLogger().info("126: betrayerPlayerList.remove(gamePlayer)");
+        betrayerPlayerList.remove(player);
         break;
       default:
+        plugin.getLogger().info("130: Default");
         break;
     }
     if (villagePlayerList.size() == 0) {

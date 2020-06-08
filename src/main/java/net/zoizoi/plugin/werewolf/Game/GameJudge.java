@@ -25,7 +25,7 @@ public class GameJudge implements Listener {
     this.GameID = SubCommandMaster.GameID;
     plugin.getLogger().info("Stop");
     Player death = e.getEntity();
-    if (gameManager.getGame(GameID).PlayerDie(gameManager.getGame(GameID).getPlayers().get(death))) {
+    if (gameManager.getGame(GameID).PlayerDie(death)) {
       gameManager.getGame(GameID).Stop();
       for (Player player : gameManager.getGame(GameID).getPlayers().keySet()) {
         player.setGameMode(GameMode.SPECTATOR);

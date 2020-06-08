@@ -27,7 +27,11 @@ public class Job {
   }
 
   public String getJobName() {
-    return this.jobName;
+    if(jobName != null){
+      return jobName;
+    }else{
+      return "";
+    }
   }
 
   public String getJobNameJapanese() {
