@@ -30,11 +30,11 @@ public class Job {
     return this.camp;
   }
 
-  public String Work(Player player) {
+  public String Work(GamePlayer gamePlayer) {
     switch (camp) {
       case "Prophet":
-        if (player.getLife()) {
-          if (player.getJob().jobName == "Werewolf") {
+        if (gamePlayer.getLife()) {
+          if (gamePlayer.getJob().jobName == "Werewolf") {
             return "この人は人狼です";
           } else {
             return "この人は人狼ではありません";
@@ -43,10 +43,10 @@ public class Job {
           return "この人は死んでいます";
         }
       case "Necromancer":
-        if (player.getLife()) {
+        if (gamePlayer.getLife()) {
           return "この人は生きています";
         } else {
-          if (player.getJob().jobName == "Werewolf") {
+          if (gamePlayer.getJob().jobName == "Werewolf") {
             return "この人は人狼です";
           } else {
             return "この人は人狼ではありません";

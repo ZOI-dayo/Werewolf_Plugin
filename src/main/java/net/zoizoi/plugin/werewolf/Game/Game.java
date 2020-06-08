@@ -2,6 +2,7 @@ package net.zoizoi.plugin.werewolf.Game;
 
 import net.zoizoi.plugin.werewolf.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -13,11 +14,11 @@ import java.util.List;
 import java.util.Random;
 
 public class Game {
-  private List<Player> playerList = new ArrayList<Player>();
+  private List<GamePlayer> playerList = new ArrayList<GamePlayer>();
   private String Result;
-  private List<Player> villagePlayerList = new ArrayList<Player>();
-  private List<Player> wolfPlayerList = new ArrayList<Player>();
-  private List<Player> betrayerPlayerList = new ArrayList<Player>();
+  private List<GamePlayer> villagePlayerList = new ArrayList<GamePlayer>();
+  private List<GamePlayer> wolfPlayerList = new ArrayList<GamePlayer>();
+  private List<GamePlayer> betrayerPlayerList = new ArrayList<GamePlayer>();
 
   public boolean isReady = false;
   public boolean isRunning = false;
@@ -26,16 +27,16 @@ public class Game {
     Result = "";
   }
 
-  public void AddPlayer(org.bukkit.entity.Player player_bukkit) {
+  public void AddPlayer(Player player) {
     Job job = new Job("None");
-    Player player = new Player(player_bukkit,true,job);
-    playerList.add(player);
+    GamePlayer gamePlayer = new GamePlayer(player,true,job);
+    playerList.add(gamePlayer);
   }
   public void DeletePlayer(org.bukkit.entity.Player player) {
     playerList.remove(player);
   }
 
-  public List<Player> getPlayers() {
+  public List<GamePlayer> getPlayers() {
     return playerList;
   }
 
@@ -71,19 +72,19 @@ public class Game {
     }
   }
 
-  public boolean PlayerDie(Player player) {
-    player.setLife(false);
-    switch (player.getJob().getJobName()) {
+  public boolean PlayerDie(GamePlayer gamePlayer) {
+    gamePlayer.setLife(false);
+    switch (gamePlayer.getJob().getJobName()) {
       case "Citizen":
       case "Prophet":
       case "Necromancer":
-        villagePlayerList.remove(player);
+        villagePlayerList.remove(gamePlayer);
         break;
       case "Werewolf":
-        wolfPlayerList.remove(player);
+        wolfPlayerList.remove(gamePlayer);
         break;
       case "Betrayer":
-        betrayerPlayerList.remove(player);
+        betrayerPlayerList.remove(gamePlayer);
         break;
       default:
         break;

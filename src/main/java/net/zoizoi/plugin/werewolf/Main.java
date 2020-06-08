@@ -1,7 +1,6 @@
 package net.zoizoi.plugin.werewolf;
 
 import net.zoizoi.plugin.werewolf.Command.CommandMaster;
-import net.zoizoi.plugin.werewolf.Command.CommandTabComplete;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;

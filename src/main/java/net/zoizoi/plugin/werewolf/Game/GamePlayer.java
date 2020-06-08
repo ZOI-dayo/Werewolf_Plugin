@@ -1,11 +1,11 @@
 package net.zoizoi.plugin.werewolf.Game;
 
-public class Player {
+public class GamePlayer {
   private org.bukkit.entity.Player player;
   private boolean life = true;
   private Job job;
 
-  public Player(org.bukkit.entity.Player player, Boolean life, Job job) {
+  public GamePlayer(org.bukkit.entity.Player player, Boolean life, Job job) {
     this.player = player;
     this.life = life;
     this.job = job;
