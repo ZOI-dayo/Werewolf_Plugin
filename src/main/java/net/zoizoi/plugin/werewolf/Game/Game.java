@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Game {
+  Main plugin;
   private List<GamePlayer> playerList = new ArrayList<GamePlayer>();
   private String Result;
   private List<GamePlayer> villagePlayerList = new ArrayList<GamePlayer>();
@@ -23,18 +24,32 @@ public class Game {
   public boolean isReady = false;
   public boolean isRunning = false;
 
-  public Game() {
+  public Game(Main plugin) {
+    this.plugin = plugin;
     Result = "";
   }
 
-  public void AddPlayer(Player player) {
-    Job job = new Job("None");
-    GamePlayer gamePlayer = new GamePlayer(player,true,job);
-    playerList.add(gamePlayer);
+  public boolean AddPlayer(Player player) {
+    Job job = new Job(plugin, "None");
+    GamePlayer gamePlayer = new GamePlayer(plugin, player);
+    if (playerList.contains(gamePlayer)) {
+      return false;
+    } else {
+      playerList.add(gamePlayer);
+      return true;
+    }
   }
-  public void DeletePlayer(org.bukkit.entity.Player player) {
-    playerList.remove(player);
+
+  public boolean DeletePlayer(Player player) {
+    GamePlayer gamePlayer = new GamePlayer(plugin, player);
+    if (playerList.contains(gamePlayer)) {
+      playerList.remove(player);
+      return true;
+    } else {
+      return false;
+    }
   }
+
 
   public List<GamePlayer> getPlayers() {
     return playerList;
@@ -47,25 +62,40 @@ public class Game {
     Collections.shuffle(playerList);
     for (int i = 0; i < playerList.toArray().length; i++) {
       if (i < plugin.config.getInt("member." + playerList.toArray().length + "Citizen")) {
-        playerList.get(i).setJob(new Job("Citizen"));
+        playerList.get(i).setJob(new Job(plugin, "Citizen"));
+        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは市民です", 10, 50, 10);
+        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
+        playerList.get(i).getPlayer().sendMessage("あなたは 市民 です");
         villagePlayerList.add(playerList.get(i));
       } else if (i < plugin.config.getInt("member." + playerList.toArray().length + "Citizen")
         + plugin.config.getInt("member." + playerList.toArray().length + "Prophet")) {
-        playerList.get(i).setJob(new Job("Prophet"));
+        playerList.get(i).setJob(new Job(plugin, "Prophet"));
+        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは予言者です", 10, 50, 10);
+        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
+        playerList.get(i).getPlayer().sendMessage("あなたは 予言者 です");
         villagePlayerList.add(playerList.get(i));
       } else if (i < plugin.config.getInt("member." + playerList.toArray().length + "Citizen")
         + plugin.config.getInt("member." + playerList.toArray().length + "Prophet")
         + plugin.config.getInt("member." + playerList.toArray().length + "Necromancer")) {
-        playerList.get(i).setJob(new Job("Necromancer"));
+        playerList.get(i).setJob(new Job(plugin, "Necromancer"));
+        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは霊媒師です", 10, 50, 10);
+        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
+        playerList.get(i).getPlayer().sendMessage("あなたは 霊媒師 です");
         villagePlayerList.add(playerList.get(i));
       } else if (i < plugin.config.getInt("member." + playerList.toArray().length + "Citizen")
         + plugin.config.getInt("member." + playerList.toArray().length + "Prophet")
         + plugin.config.getInt("member." + playerList.toArray().length + "Necromancer")
         + plugin.config.getInt("member." + playerList.toArray().length + "Werewolf")) {
-        playerList.get(i).setJob(new Job("Werewolf"));
+        playerList.get(i).setJob(new Job(plugin, "Werewolf"));
+        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは人狼です", 10, 50, 10);
+        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
+        playerList.get(i).getPlayer().sendMessage("あなたは 人狼 です");
         wolfPlayerList.add(playerList.get(i));
       } else {
-        playerList.get(i).setJob(new Job("Betrayer"));
+        playerList.get(i).setJob(new Job(plugin, "Betrayer"));
+        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは狂人です", 10, 50, 10);
+        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
+        playerList.get(i).getPlayer().sendMessage("あなたは 狂人 です");
         betrayerPlayerList.add(playerList.get(i));
       }
 
@@ -89,17 +119,18 @@ public class Game {
       default:
         break;
     }
-    if(villagePlayerList.toArray().length == 0){
+    if (villagePlayerList.toArray().length == 0) {
       this.Result = "Village";
       return true;
-    }else if(wolfPlayerList.toArray().length == 0){
+    } else if (wolfPlayerList.toArray().length == 0) {
       this.Result = "Wolf";
       return true;
-    }else{
+    } else {
       return false;
     }
   }
-  public void Stop(){
+
+  public void Stop() {
     isRunning = false;
   }
 }

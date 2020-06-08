@@ -1,10 +1,14 @@
 package net.zoizoi.plugin.werewolf.Game;
 
+import net.zoizoi.plugin.werewolf.Main;
+
 public class Job {
+  Main plugin;
   private String jobName;
   private String camp;
 
-  public Job(String jobName) {
+  public Job(Main plugin,String jobName) {
+    this.plugin = plugin;
     this.jobName = jobName;
     switch (jobName) {
       case "Citizen":     // 市民
@@ -25,6 +29,11 @@ public class Job {
   public String getJobName() {
     return this.jobName;
   }
+
+  public String getJobNameJapanese() {
+    return plugin.config.getString("japanese.jobs."+jobName);
+  }
+
 
   public String getCamp() {
     return this.camp;

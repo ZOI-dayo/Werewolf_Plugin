@@ -2,6 +2,7 @@ package net.zoizoi.plugin.werewolf.Command.SubCommand;
 
 import net.zoizoi.plugin.werewolf.Game.Game;
 import net.zoizoi.plugin.werewolf.Game.GameManager;
+import net.zoizoi.plugin.werewolf.Game.GamePlayer;
 import net.zoizoi.plugin.werewolf.Main;
 import net.zoizoi.plugin.werewolf.utls.TextUtils;
 import org.bukkit.*;
@@ -10,7 +11,7 @@ import org.bukkit.entity.*;
 
 public class SubCommandMaster {
   Main plugin;
-  GameManager gameManager = new GameManager();
+  GameManager gameManager = new GameManager(plugin);
   int GameID;
 
   public SubCommandMaster(Main plugin) {
@@ -28,36 +29,49 @@ public class SubCommandMaster {
           p.sendTitle("人狼ゲームに参加できます", "/wolf join で参加", 10, 50, 10);
           p.sendMessage("人狼ゲームの募集が開始されました");
           TextUtils.sendHoverText(p, ChatColor.RED + "＞＞＞このメッセージを押して参加＜＜＜", "人狼ゲームに参加する", "/wolf join");
+        } else {
+          p.performCommand("wolf join");
         }
       }
       return true;
     } else if (args[0].equals("join")) {
-      player.sendMessage("人狼ゲームに参加しましたあああaaa");
       if (!gameManager.getGame(GameID).isReady) {
-        player.sendMessage("人狼ゲームに参加しましたあああ");
-        gameManager.getGame(GameID).AddPlayer(player);
-        player.sendMessage("人狼ゲームに参加しました");
-        TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");
-        player.sendMessage("ゲームの開始を待っています");
-        player.setPlayerListName(ChatColor.RED + player.getName());
-        player.sendTitle("ゲームに参加しました", "ゲームの開始を待っています", 10, 50, 10);
-        player.setGameMode(GameMode.ADVENTURE);
-        Location location = new Location(player.getWorld(),
-          plugin.config.getDouble("Location.Lobby.x"),
-          plugin.config.getDouble("Location.Lobby.y"),
-          plugin.config.getDouble("Location.Lobby.z"));
-        player.teleport(location);
-        return true;
+        if (gameManager.getGame(GameID).AddPlayer(player)) {
+          player.sendMessage("人狼ゲームに参加しました");
+          TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");
+          player.sendMessage("ゲームの開始を待っています");
+          player.setPlayerListName(ChatColor.RED + player.getName());
+          player.sendTitle("ゲームに参加しました", "ゲームの開始を待っています", 10, 50, 10);
+          player.setGameMode(GameMode.ADVENTURE);
+          Location Lobby = new Location(player.getWorld(),
+            plugin.config.getDouble("Location.Lobby.x"),
+            plugin.config.getDouble("Location.Lobby.y"),
+            plugin.config.getDouble("Location.Lobby.z"));
+          player.teleport(Lobby);
+          return true;
+        } else {
+          player.sendMessage("既に参加しています");
+          return true;
+        }
       } else {
         player.sendMessage("ゲームが開始されているので参加できません");
+        return true;
       }
     } else if (args[0].equals("cancel")) {
       if (!gameManager.getGame(GameID).isReady) {
-        gameManager.getGame(GameID).DeletePlayer(player);
-        player.sendMessage("人狼ゲームから離脱しました");
-        TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞再参加する場合はこちら＜＜＜", "人狼ゲームに参加する", "/wolf join");
-        player.setPlayerListName(player.getName());
-        return true;
+        if (gameManager.getGame(GameID).DeletePlayer(player)) {
+          player.sendMessage("人狼ゲームから離脱しました");
+          TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞再参加する場合はこちら＜＜＜", "人狼ゲームに参加する", "/wolf join");
+          player.setPlayerListName(player.getName());
+          Location quitLobby = new Location(player.getWorld(),
+            plugin.config.getDouble("Location.quitLobby.x"),
+            plugin.config.getDouble("Location.quitLobby.y"),
+            plugin.config.getDouble("Location.quitLobby.z"));
+          player.teleport(quitLobby);
+          return true;
+        }else{
+          player.sendMessage("ゲームに参加していません");
+        }
       } else {
         player.sendMessage("ゲームが開始されているので離脱できません");
       }
@@ -66,7 +80,7 @@ public class SubCommandMaster {
         gameManager.getGame(GameID).isReady = true;
         World world = player.getWorld();
         for (Player p : world.getPlayers()) {
-          if (p != player) {
+          if (!gameManager.getGame(GameID).getPlayers().contains(p)) {
             p.sendTitle("人狼ゲームの募集が締め切られました", "", 10, 50, 10);
             p.sendMessage("人狼ゲームの募集が締め切られました");
           } else {
@@ -79,7 +93,19 @@ public class SubCommandMaster {
       }
     } else if (args[0].equals("start")) {
       gameManager.getGame(GameID).Start(plugin);
+      Location gameStage = new Location(player.getWorld(),
+        plugin.config.getDouble("Location.gameStage.x"),
+        plugin.config.getDouble("Location.gameStage.y"),
+        plugin.config.getDouble("Location.gameStage.z"));
+      for (GamePlayer p : gameManager.getGame(GameID).getPlayers()) {
+        p.getPlayer().teleport(gameStage);
+      }
     } else if (args[0].equals("job")) {
+      for (GamePlayer gamePlayer:gameManager.getGame(GameID).getPlayers()) {
+        if(gamePlayer.getPlayer().equals(player)){
+          player.sendMessage("あなたの役職は "+gamePlayer.getJob().getJobNameJapanese()+" です");
+        }
+      }
     }
     return false;
   }
