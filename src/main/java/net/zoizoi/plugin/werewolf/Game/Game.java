@@ -8,18 +8,15 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Game {
   Main plugin;
-  private List<GamePlayer> playerList = new ArrayList<GamePlayer>();
+  private LinkedHashMap<Player, GamePlayer> playerList = new LinkedHashMap<Player, GamePlayer>();
   private String Result;
-  private List<GamePlayer> villagePlayerList = new ArrayList<GamePlayer>();
-  private List<GamePlayer> wolfPlayerList = new ArrayList<GamePlayer>();
-  private List<GamePlayer> betrayerPlayerList = new ArrayList<GamePlayer>();
+  private LinkedHashMap<Player, GamePlayer> villagePlayerList = new LinkedHashMap<Player, GamePlayer>();
+  private LinkedHashMap<Player, GamePlayer> wolfPlayerList = new LinkedHashMap<Player, GamePlayer>();
+  private LinkedHashMap<Player, GamePlayer> betrayerPlayerList = new LinkedHashMap<Player, GamePlayer>();
 
   public boolean isReady = false;
   public boolean isRunning = false;
@@ -30,19 +27,18 @@ public class Game {
   }
 
   public boolean AddPlayer(Player player) {
-    Job job = new Job(plugin, "None");
-    GamePlayer gamePlayer = new GamePlayer(plugin, player);
-    if (playerList.contains(gamePlayer)) {
+    if (playerList.containsKey(player)) {
+      // 既に含まれている場合
       return false;
     } else {
-      playerList.add(gamePlayer);
+      GamePlayer gamePlayer = new GamePlayer(plugin, player);
+      playerList.put(player, gamePlayer);
       return true;
     }
   }
 
   public boolean DeletePlayer(Player player) {
-    GamePlayer gamePlayer = new GamePlayer(plugin, player);
-    if (playerList.contains(gamePlayer)) {
+    if (playerList.containsKey(player)) {
       playerList.remove(player);
       return true;
     } else {
@@ -51,52 +47,53 @@ public class Game {
   }
 
 
-  public List<GamePlayer> getPlayers() {
+  public HashMap<Player, GamePlayer> getPlayers() {
     return playerList;
   }
 
   public void Start(Main plugin) {
     isRunning = true;
-    Random random = new Random();
-    int randomValue = random.nextInt(10);
-    Collections.shuffle(playerList);
-    for (int i = 0; i < playerList.toArray().length; i++) {
-      if (i < plugin.config.getInt("member." + playerList.toArray().length + "Citizen")) {
-        playerList.get(i).setJob(new Job(plugin, "Citizen"));
-        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは市民です", 10, 50, 10);
-        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
-        playerList.get(i).getPlayer().sendMessage("あなたは 市民 です");
-        villagePlayerList.add(playerList.get(i));
-      } else if (i < plugin.config.getInt("member." + playerList.toArray().length + "Citizen")
-        + plugin.config.getInt("member." + playerList.toArray().length + "Prophet")) {
-        playerList.get(i).setJob(new Job(plugin, "Prophet"));
-        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは予言者です", 10, 50, 10);
-        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
-        playerList.get(i).getPlayer().sendMessage("あなたは 予言者 です");
-        villagePlayerList.add(playerList.get(i));
-      } else if (i < plugin.config.getInt("member." + playerList.toArray().length + "Citizen")
-        + plugin.config.getInt("member." + playerList.toArray().length + "Prophet")
-        + plugin.config.getInt("member." + playerList.toArray().length + "Necromancer")) {
-        playerList.get(i).setJob(new Job(plugin, "Necromancer"));
-        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは霊媒師です", 10, 50, 10);
-        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
-        playerList.get(i).getPlayer().sendMessage("あなたは 霊媒師 です");
-        villagePlayerList.add(playerList.get(i));
-      } else if (i < plugin.config.getInt("member." + playerList.toArray().length + "Citizen")
-        + plugin.config.getInt("member." + playerList.toArray().length + "Prophet")
-        + plugin.config.getInt("member." + playerList.toArray().length + "Necromancer")
-        + plugin.config.getInt("member." + playerList.toArray().length + "Werewolf")) {
-        playerList.get(i).setJob(new Job(plugin, "Werewolf"));
-        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは人狼です", 10, 50, 10);
-        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
-        playerList.get(i).getPlayer().sendMessage("あなたは 人狼 です");
-        wolfPlayerList.add(playerList.get(i));
+
+    List<Player> shuffledPlayerList = new ArrayList<Player>(playerList.keySet());
+    Collections.shuffle(shuffledPlayerList);
+    for (int i = 0; i < shuffledPlayerList.size(); i++) {
+      plugin.getLogger().info("" + shuffledPlayerList.size());
+      if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + "Citizen")) {
+        playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Citizen"));
+        shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは市民です", 10, 50, 10);
+        shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
+        shuffledPlayerList.get(i).sendMessage("あなたは 市民 です");
+        villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
+      } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + "Citizen")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Prophet")) {
+        playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Prophet"));
+        shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは予言者です", 10, 50, 10);
+        shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
+        shuffledPlayerList.get(i).sendMessage("あなたは 予言者 です");
+        villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
+      } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + "Citizen")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Prophet")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Necromancer")) {
+        playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Necromancer"));
+        shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは霊媒師です", 10, 50, 10);
+        shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
+        shuffledPlayerList.get(i).sendMessage("あなたは 霊媒師 です");
+        villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
+      } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + "Citizen")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Prophet")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Necromancer")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Werewolf")) {
+        playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Werewolf"));
+        shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは人狼です", 10, 50, 10);
+        shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
+        shuffledPlayerList.get(i).sendMessage("あなたは 人狼 です");
+        villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
       } else {
-        playerList.get(i).setJob(new Job(plugin, "Betrayer"));
-        playerList.get(i).getPlayer().sendTitle("ゲームが開始されました", "あなたは狂人です", 10, 50, 10);
-        playerList.get(i).getPlayer().sendMessage("ゲームが開始されました");
-        playerList.get(i).getPlayer().sendMessage("あなたは 狂人 です");
-        betrayerPlayerList.add(playerList.get(i));
+        playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Betrayer"));
+        shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは狂人です", 10, 50, 10);
+        shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
+        shuffledPlayerList.get(i).sendMessage("あなたは 狂人 です");
+        villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
       }
 
     }
@@ -119,10 +116,10 @@ public class Game {
       default:
         break;
     }
-    if (villagePlayerList.toArray().length == 0) {
+    if (villagePlayerList.size() == 0) {
       this.Result = "Village";
       return true;
-    } else if (wolfPlayerList.toArray().length == 0) {
+    } else if (wolfPlayerList.size() == 0) {
       this.Result = "Wolf";
       return true;
     } else {

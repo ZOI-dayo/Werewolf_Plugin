@@ -69,7 +69,7 @@ public class SubCommandMaster {
             plugin.config.getDouble("Location.quitLobby.z"));
           player.teleport(quitLobby);
           return true;
-        }else{
+        } else {
           player.sendMessage("ゲームに参加していません");
         }
       } else {
@@ -80,7 +80,7 @@ public class SubCommandMaster {
         gameManager.getGame(GameID).isReady = true;
         World world = player.getWorld();
         for (Player p : world.getPlayers()) {
-          if (!gameManager.getGame(GameID).getPlayers().contains(p)) {
+          if (!gameManager.getGame(GameID).getPlayers().containsKey(p)) {
             p.sendTitle("人狼ゲームの募集が締め切られました", "", 10, 50, 10);
             p.sendMessage("人狼ゲームの募集が締め切られました");
           } else {
@@ -97,13 +97,13 @@ public class SubCommandMaster {
         plugin.config.getDouble("Location.gameStage.x"),
         plugin.config.getDouble("Location.gameStage.y"),
         plugin.config.getDouble("Location.gameStage.z"));
-      for (GamePlayer p : gameManager.getGame(GameID).getPlayers()) {
-        p.getPlayer().teleport(gameStage);
+      for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+        p.teleport(gameStage);
       }
     } else if (args[0].equals("job")) {
-      for (GamePlayer gamePlayer:gameManager.getGame(GameID).getPlayers()) {
-        if(gamePlayer.getPlayer().equals(player)){
-          player.sendMessage("あなたの役職は "+gamePlayer.getJob().getJobNameJapanese()+" です");
+      for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+        if (p.equals(player)) {
+          player.sendMessage("あなたの役職は " + gameManager.getGame(GameID).getPlayers().get(p).getJob().getJobNameJapanese() + " です");
         }
       }
     }
