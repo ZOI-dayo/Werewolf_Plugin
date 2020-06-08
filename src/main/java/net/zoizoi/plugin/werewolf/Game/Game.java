@@ -93,14 +93,14 @@ public class Game {
         shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは人狼です", 10, 50, 10);
         shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
         shuffledPlayerList.get(i).sendMessage("あなたは 人狼 です");
-        villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
+        wolfPlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
       } else {
         plugin.getLogger().info("Betrayer");
         playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Betrayer"));
         shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは狂人です", 10, 50, 10);
         shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
         shuffledPlayerList.get(i).sendMessage("あなたは 狂人 です");
-        villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
+        betrayerPlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
       }
       for (Player p : playerList.keySet())
         plugin.getLogger().info("Name = " + p.getName());
@@ -109,23 +109,18 @@ public class Game {
 
   public boolean PlayerDie(Player player) {
     GamePlayer gamePlayer = playerList.get(player);
-    plugin.getLogger().info("110: " + gamePlayer/*.getJob().getJobName()*/);
-    plugin.getLogger().info("111: " + villagePlayerList.size());
-    plugin.getLogger().info("112: " + wolfPlayerList.size());
+
     gamePlayer.setLife(false);
     switch (gamePlayer.getJob().getJobName()) {
       case "Citizen":
       case "Prophet":
       case "Necromancer":
-        plugin.getLogger().info("118: villagePlayerList.remove(gamePlayer);");
         villagePlayerList.remove(player);
         break;
       case "Werewolf":
-        plugin.getLogger().info("122: wolfPlayerList.remove(gamePlayer);");
         wolfPlayerList.remove(player);
         break;
       case "Betrayer":
-        plugin.getLogger().info("126: betrayerPlayerList.remove(gamePlayer)");
         betrayerPlayerList.remove(player);
         break;
       default:
