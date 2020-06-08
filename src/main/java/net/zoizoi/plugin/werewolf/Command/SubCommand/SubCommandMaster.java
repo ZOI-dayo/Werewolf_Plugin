@@ -8,11 +8,13 @@ import net.zoizoi.plugin.werewolf.utls.TextUtils;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.entity.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class SubCommandMaster {
-  Main plugin;
-  GameManager gameManager = new GameManager(plugin);
-  int GameID;
+  public static Main plugin;
+  public static GameManager gameManager = new GameManager(plugin);
+  public static int GameID;
 
   public SubCommandMaster(Main plugin) {
     this.plugin = plugin;
@@ -88,8 +90,10 @@ public class SubCommandMaster {
             p.sendMessage("ゲームの準備をしています");
           }
         }
+        return true;
       } else {
         player.sendMessage("ゲームはすでに準備されています");
+        return true;
       }
     } else if (args[0].equals("start")) {
       gameManager.getGame(GameID).Start(plugin);
@@ -98,15 +102,31 @@ public class SubCommandMaster {
         plugin.config.getDouble("Location.gameStage.y"),
         plugin.config.getDouble("Location.gameStage.z"));
       for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+        p.sendTitle("開始", "ゲームが開始されました", 10, 50, 10);
         p.teleport(gameStage);
       }
+      return true;
     } else if (args[0].equals("job")) {
       for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
         if (p.equals(player)) {
           player.sendMessage("あなたの役職は " + gameManager.getGame(GameID).getPlayers().get(p).getJob().getJobNameJapanese() + " です");
         }
       }
+      return true;
+    } else if (args[0].equals("reset")) {
+      gameManager.DeleteGame(GameID);
+      player.sendMessage("ゲームを消去しました");
+      return true;
+    } else if (args[0].equals("work")) {
+      if (args.length < 2) {
+        player.sendMessage("オプションが不足しています");
+        return false;
+      } else {
+        gameManager.getGame(GameID).getPlayers().get(player).getJob().Work(gameManager.getGame(GameID).getPlayers().get( args[1]));
+      }
+      return true;
     }
     return false;
   }
+
 }

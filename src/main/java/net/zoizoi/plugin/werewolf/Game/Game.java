@@ -58,37 +58,44 @@ public class Game {
     Collections.shuffle(shuffledPlayerList);
     for (int i = 0; i < shuffledPlayerList.size(); i++) {
       plugin.getLogger().info("" + shuffledPlayerList.size());
-      if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + "Citizen")) {
+      plugin.getLogger().info("i = " + i);
+      plugin.getLogger().info("Citizen = " + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen"));
+      plugin.getLogger().info("Citizen = " + plugin.config.getInt("member.2.Citizen"));
+      if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")) {
         playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Citizen"));
         shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは市民です", 10, 50, 10);
         shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
         shuffledPlayerList.get(i).sendMessage("あなたは 市民 です");
         villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
-      } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + "Citizen")
-        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Prophet")) {
+      } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")) {
+        plugin.getLogger().info("Prophet");
         playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Prophet"));
         shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは予言者です", 10, 50, 10);
         shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
         shuffledPlayerList.get(i).sendMessage("あなたは 予言者 です");
         villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
-      } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + "Citizen")
-        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Prophet")
-        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Necromancer")) {
+      } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")) {
+        plugin.getLogger().info("Necromancer");
         playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Necromancer"));
         shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは霊媒師です", 10, 50, 10);
         shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
         shuffledPlayerList.get(i).sendMessage("あなたは 霊媒師 です");
         villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
-      } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + "Citizen")
-        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Prophet")
-        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Necromancer")
-        + plugin.config.getInt("member." + shuffledPlayerList.size() + "Werewolf")) {
+      } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")
+        + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Werewolf")) {
+        plugin.getLogger().info("Werewolf");
         playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Werewolf"));
         shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは人狼です", 10, 50, 10);
         shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
         shuffledPlayerList.get(i).sendMessage("あなたは 人狼 です");
         villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
       } else {
+        plugin.getLogger().info("Betrayer");
         playerList.get(shuffledPlayerList.get(i)).setJob(new Job(plugin, "Betrayer"));
         shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは狂人です", 10, 50, 10);
         shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
@@ -129,5 +136,8 @@ public class Game {
 
   public void Stop() {
     isRunning = false;
+  }
+  public String getResult(){
+    return Result;
   }
 }

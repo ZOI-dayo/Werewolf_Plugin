@@ -24,4 +24,7 @@ public class GameManager {
     return gameList.get(ID);
     // return game;
   }
+  public void DeleteGame(int ID) {
+    gameList.remove(ID);
+  }
 }
