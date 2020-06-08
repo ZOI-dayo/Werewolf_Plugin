@@ -33,8 +33,8 @@ public class startSubCommand {
       ItemStack Arrow = new ItemStack(Material.ARROW,16);
       inventory.addItem(Arrow);
       //
-      ItemStack Bread = new ItemStack(Material.BREAD,32);
-      inventory.addItem(Bread);
+      ItemStack Steak = new ItemStack(Material.COOKED_BEEF,32);
+      inventory.addItem(Steak);
       //
       p.sendTitle("開始", "ゲームが開始されました", 10, 50, 10);
       p.teleport(gameStage);
