@@ -30,9 +30,9 @@ public class GameJudge implements Listener {
       for (Player player : gameManager.getGame(GameID).getPlayers().keySet()) {
         player.setGameMode(GameMode.SPECTATOR);
         player.sendTitle(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);
-        player.sendMessage("--------------");
-        player.sendMessage(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利");
-        player.sendMessage("--------------");
+        player.sendMessage("+-----------+");
+        player.sendMessage("| "+plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利 |");
+        player.sendMessage("+-----------+");
       }
     } else {
       Location quitLobby = new Location(death.getWorld(),

@@ -124,10 +124,10 @@ public class Game {
         break;
     }
     if (villagePlayerList.size() == 0) {
-      this.Result = "Village";
+      this.Result = "Wolf";
       return true;
     } else if (wolfPlayerList.size() == 0) {
-      this.Result = "Wolf";
+      this.Result = "Village";
       return true;
     } else {
       return false;

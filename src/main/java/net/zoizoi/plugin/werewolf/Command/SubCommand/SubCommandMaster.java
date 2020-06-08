@@ -122,7 +122,8 @@ public class SubCommandMaster {
         player.sendMessage("オプションが不足しています");
         return false;
       } else {
-        gameManager.getGame(GameID).getPlayers().get(player).getJob().Work(gameManager.getGame(GameID).getPlayers().get( args[1]));
+        Player target = plugin.getServer().getPlayer(args[1]);
+        gameManager.getGame(GameID).getPlayers().get(player).getJob().Work(gameManager.getGame(GameID).getPlayers().get(target));
       }
       return true;
     }
