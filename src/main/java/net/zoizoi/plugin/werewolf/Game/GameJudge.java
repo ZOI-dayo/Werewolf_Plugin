@@ -28,6 +28,7 @@ public class GameJudge implements Listener {
     if (gameManager.getGame(GameID).PlayerDie(death)) {
       gameManager.getGame(GameID).Stop();
       for (Player player : gameManager.getGame(GameID).getPlayers().keySet()) {
+        player.getInventory().clear();
         player.setGameMode(GameMode.SPECTATOR);
         plugin.getLogger().info(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()));
         player.sendTitle(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);

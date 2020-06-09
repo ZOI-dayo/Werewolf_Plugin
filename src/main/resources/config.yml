@@ -13,7 +13,7 @@ japanese:
     Betrayer: 占われても市民と出ますが、人狼の味方です。うまく人狼を勝たせましょう。
   camp:
     Village: 村人陣営
-    Wolf: 狼陣営
+    Wolf: 人狼陣営
 member:
   2:
     Citizen: 1

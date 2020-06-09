@@ -25,7 +25,11 @@ public class GameManager {
   }
 
   public Game getGame(int ID) {
-    return gameList.get(ID);
+    if (0 < gameList.size()) {
+      return gameList.get(ID);
+    } else {
+      return null;
+    }
     // return game;
   }
 

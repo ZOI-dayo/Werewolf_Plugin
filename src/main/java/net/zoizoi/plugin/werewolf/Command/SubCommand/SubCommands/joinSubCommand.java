@@ -13,10 +13,11 @@ public class joinSubCommand {
   public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID){
     if (!gameManager.getGame(GameID).isReady) {
       if (gameManager.getGame(GameID).AddPlayer(player)) {
+        player.getInventory().clear();
         player.sendMessage("人狼ゲームに参加しました");
-        TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");
+        TextUtils.sendHoverText(player, ChatColor.GREEN + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");
         player.sendMessage("ゲームの開始を待っています");
-        player.setPlayerListName(ChatColor.RED + player.getName());
+        player.setPlayerListName(ChatColor.GREEN + player.getName());
         player.sendTitle("ゲームに参加しました", "ゲームの開始を待っています", 10, 50, 10);
         player.setGameMode(GameMode.ADVENTURE);
         Location Lobby = new Location(player.getWorld(),
