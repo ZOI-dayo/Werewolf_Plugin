@@ -39,7 +39,7 @@ public class startSubCommand {
       SuperBow.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 10000);
       SuperBow.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 10000);
       ItemMeta SuperBowMeta = SuperBow.getItemMeta();
-      SuperBowMeta.setDisplayName("一撃必殺弓");
+      SuperBowMeta.setDisplayName("一撃必殺の弓");
       SuperBow.setItemMeta(SuperBowMeta); // Set Meta
       inventory.addItem(SuperBow);
       // 矢
@@ -59,12 +59,14 @@ public class startSubCommand {
       // 跳躍5ポーション
       ItemStack Potion_JUMP_5 = new ItemStack(Material.POTION,1);
       PotionMeta Potion_JUMP_5_Meta = (PotionMeta) Potion_JUMP_5.getItemMeta();
+      Potion_JUMP_5_Meta.setDisplayName("跳躍力上昇のポーション");
       Potion_JUMP_5_Meta.addCustomEffect(new PotionEffect(PotionEffectType.JUMP, 600, 4), true);
       Potion_JUMP_5.setItemMeta(Potion_JUMP_5_Meta); // Set Meta
       RundomItems.add(Potion_JUMP_5);
       // 移動速度上昇5
       ItemStack Potion_SPEED_5 = new ItemStack(Material.POTION,1);
       PotionMeta Potion_SPEED_5_Meta = (PotionMeta) Potion_SPEED_5.getItemMeta();
+      Potion_SPEED_5_Meta.setDisplayName("移動速度上昇のポーション");
       Potion_SPEED_5_Meta.addCustomEffect(new PotionEffect(PotionEffectType.SPEED, 600, 4), true);
       Potion_SPEED_5.setItemMeta(Potion_SPEED_5_Meta); // Set Meta
       RundomItems.add(Potion_SPEED_5);
@@ -72,7 +74,7 @@ public class startSubCommand {
       ItemStack SuperPickaxe = new ItemStack(Material.STONE_PICKAXE,1);
       SuperPickaxe.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 10000);
       ItemMeta SuperPickaxeMeta = SuperPickaxe.getItemMeta();
-      SuperPickaxeMeta.setDisplayName("一撃必殺ピッケル");
+      SuperPickaxeMeta.setDisplayName("一撃必殺のピッケル");
       if (SuperPickaxeMeta instanceof Damageable) {
         ((Damageable) SuperPickaxeMeta).setDamage(10);
       }
@@ -84,12 +86,14 @@ public class startSubCommand {
       // 透明ポーション
       ItemStack Potion_Invisibility = new ItemStack(Material.POTION,1);
       PotionMeta Potion_Invisibility_Meta = (PotionMeta) Potion_Invisibility.getItemMeta();
+      Potion_Invisibility_Meta.setDisplayName("透明化のポーション");
       Potion_Invisibility_Meta.addCustomEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 600, 1), true);
       Potion_Invisibility.setItemMeta(Potion_Invisibility_Meta); // Set Meta
       RundomItems.add(Potion_Invisibility);
       // 一撃残留ポーション
       ItemStack Potion_Damage_Lingering = new ItemStack(Material.LINGERING_POTION,1);
       PotionMeta Potion_Damage_Lingering_Meta = (PotionMeta) Potion_Damage_Lingering.getItemMeta();
+      Potion_Damage_Lingering_Meta.setDisplayName("一撃必殺の残留ポーション");
       Potion_Damage_Lingering_Meta.addCustomEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,600,1),true);
       Potion_Damage_Lingering.setItemMeta(Potion_Damage_Lingering_Meta); // Set Meta
       RundomItems.add(Potion_Damage_Lingering);
@@ -103,6 +107,7 @@ public class startSubCommand {
       // 盲目残留ポーション(x3)
       ItemStack Potion_Blindness_Lingering = new ItemStack(Material.LINGERING_POTION,3);
       PotionMeta Potion_Blindness_Lingering_Meta = (PotionMeta) Potion_Blindness_Lingering.getItemMeta();
+      Potion_Blindness_Lingering_Meta.setDisplayName("盲目の残留ポーション");
       Potion_Blindness_Lingering_Meta.addCustomEffect(new PotionEffect(PotionEffectType.BLINDNESS,600,1),true);
       Potion_Blindness_Lingering.setItemMeta(Potion_Blindness_Lingering_Meta); // Set Meta
       RundomItems.add(Potion_Blindness_Lingering);
