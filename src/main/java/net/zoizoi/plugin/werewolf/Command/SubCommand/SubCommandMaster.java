@@ -63,7 +63,6 @@ public class SubCommandMaster {
 
       workSubCommand work = new workSubCommand();
       return work.OnCommand(player, command, label, args, plugin, gameManager, GameID);
-
     }
     return false;
   }

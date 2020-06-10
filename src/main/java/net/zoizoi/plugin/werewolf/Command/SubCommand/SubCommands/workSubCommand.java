@@ -6,13 +6,13 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
 public class workSubCommand {
-  public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID){
+  public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID) {
     if (args.length < 2) {
       player.sendMessage("オプションが不足しています");
       return false;
     } else {
       Player target = plugin.getServer().getPlayer(args[1]);
-      gameManager.getGame(GameID).getPlayers().get(player).getJob().Work(gameManager.getGame(GameID).getPlayers().get(target));
+      player.sendMessage(gameManager.getGame(GameID).getPlayers().get(player).getJob().Work(gameManager.getGame(GameID).getPlayers().get(target)));
     }
     return true;
   }

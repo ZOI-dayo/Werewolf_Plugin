@@ -7,6 +7,7 @@ import net.zoizoi.plugin.werewolf.Game.GameJudge;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.security.auth.login.LoginException;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static org.bukkit.Bukkit.getLogger;
 
 public final class Main extends JavaPlugin {
   public FileConfiguration config;
@@ -40,46 +43,57 @@ public final class Main extends JavaPlugin {
 
   @Override
   public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-    if (!command.getName().equalsIgnoreCase("wolf")) {
-      return super.onTabComplete(sender, command, alias, args);
-    } else {
-      List<String> commands = new ArrayList<>(Arrays.asList("host", "join", "cancel", "ready", "start", "job", "reset", "work"));
-      if (SubCommandMaster.gameManager.isHosted) {
-        if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isRunning) { // ゲーム中
-          commands = new ArrayList<>(Arrays.asList("job", "reset", "work"));
-        } else if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isReady) { // Ready後、ゲーム前
-          commands = new ArrayList<>(Arrays.asList("start", "reset"));
-        } else if (SubCommandMaster.gameManager.isHosted) { // Host後、Ready前
-          commands = new ArrayList<>(Arrays.asList("join", "cancel", "ready"));
-        } else { // Host前
+    if (sender instanceof Player) {
+      Player player = (Player) sender;
+      if (!command.getName().equalsIgnoreCase("wolf")) {
+        return super.onTabComplete(sender, command, alias, args);
+      } else {
+        List<String> commands = new ArrayList<>(Arrays.asList("host", "join", "cancel", "ready", "start", "job", "reset", "work"));
+        if (SubCommandMaster.gameManager.isHosted) {
+          if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isRunning) { // ゲーム中
+            commands = new ArrayList<>(Arrays.asList("job", "reset", "work"));
+          } else if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isReady) { // Ready後、ゲーム前
+            commands = new ArrayList<>(Arrays.asList("start", "reset"));
+          } else if (SubCommandMaster.gameManager.isHosted) { // Host後、Ready前
+            if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).getPlayers().containsKey(player)) {
+              commands = new ArrayList<>(Arrays.asList("cancel", "ready"));
+            } else {
+              commands = new ArrayList<>(Arrays.asList("join", "ready"));
+            }
+          } else { // Host前
+            commands = new ArrayList<>(Arrays.asList("host"));
+          }
+        } else {
           commands = new ArrayList<>(Arrays.asList("host"));
         }
-      } else {
-        commands = new ArrayList<>(Arrays.asList("host"));
-      }
 
-      List<String> Answer = new ArrayList<>();
-      if (args.length == 1) {
-        if (args[0].length() == 0) { // /wolfまで
-          return commands;
-        } else { // wolf XXX
-          //入力されている文字列と先頭一致
-          for (String S : commands) {
-            if (S.startsWith(args[0])) {
-              Answer.add(S);
+        List<String> Answer = new ArrayList<>();
+        getLogger().info("" + args.length);
+        if (args.length == 1) {
+          if (args[0].length() == 0) { // /wolfまで
+            return commands;
+          } else { // wolf XXX
+            //入力されている文字列と先頭一致
+            for (String S : commands) {
+              if (S.startsWith(args[0])) {
+                Answer.add(S);
+              }
             }
+            return Answer;
           }
-          return Answer;
-        }
-      } else if (args.length == 2) { // wolf XXX YYY
-        if (args[0] == "work") {
-          return super.onTabComplete(sender, command, alias, args);
-        }else{
+        } else if (args.length == 2) { // wolf XXX YYY
+          if (args[0].equals("work")) {
+            getLogger().info("null!!!!!!!");
+            return null;
+          } else {
+            return new ArrayList<>();
+          }
+        } else {
           return new ArrayList<>();
         }
-      } else {
-        return new ArrayList<>();
       }
+    } else {
+      return super.onTabComplete(sender, command, alias, args);
     }
   }
 }
