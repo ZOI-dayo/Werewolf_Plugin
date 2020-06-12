@@ -63,12 +63,6 @@ member:
     Necromancer: 1
     Werewolf: 3
     Betrayer: 0
-items:
-  - a
-  - b
-  - c
-colors:
-  ZOIZOI: Green
 Location:
   Lobby:
     x: 243.5
