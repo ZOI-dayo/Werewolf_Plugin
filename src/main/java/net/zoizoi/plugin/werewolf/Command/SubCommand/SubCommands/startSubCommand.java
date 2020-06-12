@@ -133,7 +133,7 @@ public class startSubCommand {
         ItemMeta SuperPickaxeMeta = SuperPickaxe.getItemMeta();
         SuperPickaxeMeta.setDisplayName("一撃必殺のピッケル");
         if (SuperPickaxeMeta instanceof Damageable) {
-          ((Damageable) SuperPickaxeMeta).setDamage(10);
+          ((Damageable) SuperPickaxeMeta).setDamage(131);
         }
         SuperPickaxe.setItemMeta(SuperPickaxeMeta); // Set Meta
         RundomItems.add(SuperPickaxe);

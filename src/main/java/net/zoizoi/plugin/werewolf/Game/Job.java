@@ -66,6 +66,7 @@ public class Job {
           }
         }
       default:
+        plugin.getLogger().info(camp);
         return "あなたの役職は特別な仕事がありません";
     }
   }
