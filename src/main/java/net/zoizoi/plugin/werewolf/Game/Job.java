@@ -44,8 +44,7 @@ public class Job {
   }
 
   public String Work(GamePlayer gamePlayer) {
-    plugin.getLogger().info(jobName + camp);
-    if(camp.equals("Prophet")){
+    if(jobName.equals("Prophet")){
       if (gamePlayer.getLife()) {
         if (gamePlayer.getJob().jobName == "Werewolf") {
           return "この人は人狼です";
@@ -55,7 +54,7 @@ public class Job {
       } else {
         return "この人は死んでいます";
       }
-    }else if(camp.equals("Necromancer")){
+    }else if(jobName.equals("Necromancer")){
       if (gamePlayer.getLife()) {
         return "この人は生きています";
       } else {
