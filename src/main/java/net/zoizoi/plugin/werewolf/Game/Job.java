@@ -44,30 +44,29 @@ public class Job {
   }
 
   public String Work(GamePlayer gamePlayer) {
-    switch (camp) {
-      case "Prophet":
-        if (gamePlayer.getLife()) {
-          if (gamePlayer.getJob().jobName == "Werewolf") {
-            return "この人は人狼です";
-          } else {
-            return "この人は人狼ではありません";
-          }
+    plugin.getLogger().info(jobName + camp);
+    if(camp.equals("Prophet")){
+      if (gamePlayer.getLife()) {
+        if (gamePlayer.getJob().jobName == "Werewolf") {
+          return "この人は人狼です";
         } else {
-          return "この人は死んでいます";
+          return "この人は人狼ではありません";
         }
-      case "Necromancer":
-        if (gamePlayer.getLife()) {
-          return "この人は生きています";
+      } else {
+        return "この人は死んでいます";
+      }
+    }else if(camp.equals("Necromancer")){
+      if (gamePlayer.getLife()) {
+        return "この人は生きています";
+      } else {
+        if (gamePlayer.getJob().jobName == "Werewolf") {
+          return "この人は人狼です";
         } else {
-          if (gamePlayer.getJob().jobName == "Werewolf") {
-            return "この人は人狼です";
-          } else {
-            return "この人は人狼ではありません";
-          }
+          return "この人は人狼ではありません";
         }
-      default:
-        plugin.getLogger().info(camp);
-        return "あなたの役職は特別な仕事がありません";
+      }
+    }else{
+      return "あなたの役職は特別な仕事がありません";
     }
   }
 }
