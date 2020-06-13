@@ -7,7 +7,7 @@ public class Job {
   private String jobName;
   private String camp;
 
-  public Job(Main plugin,String jobName) {
+  public Job(Main plugin, String jobName) {
     this.plugin = plugin;
     this.jobName = jobName;
     switch (jobName) {
@@ -27,15 +27,15 @@ public class Job {
   }
 
   public String getJobName() {
-    if(jobName != null){
+    if (jobName != null) {
       return jobName;
-    }else{
+    } else {
       return "";
     }
   }
 
   public String getJobNameJapanese() {
-    return plugin.config.getString("japanese.jobs."+jobName);
+    return plugin.config.getString("japanese.jobs." + jobName);
   }
 
 
@@ -44,7 +44,8 @@ public class Job {
   }
 
   public String Work(GamePlayer gamePlayer) {
-    if(jobName.equals("Prophet")){
+    plugin.getLogger().info(jobName);
+    if (jobName == "Prophet") {
       if (gamePlayer.getLife()) {
         if (gamePlayer.getJob().jobName == "Werewolf") {
           return "この人は人狼です";
@@ -54,7 +55,7 @@ public class Job {
       } else {
         return "この人は死んでいます";
       }
-    }else if(jobName.equals("Necromancer")){
+    } else if (jobName.equals("Necromancer")) {
       if (gamePlayer.getLife()) {
         return "この人は生きています";
       } else {
@@ -64,7 +65,7 @@ public class Job {
           return "この人は人狼ではありません";
         }
       }
-    }else{
+    } else {
       return "あなたの役職は特別な仕事がありません";
     }
   }
