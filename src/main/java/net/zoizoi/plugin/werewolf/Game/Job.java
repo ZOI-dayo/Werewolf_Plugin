@@ -6,10 +6,12 @@ public class Job {
   Main plugin;
   private String jobName;
   private String camp;
+  private boolean isUsed;
 
   public Job(Main plugin, String jobName) {
     this.plugin = plugin;
     this.jobName = jobName;
+    this.isUsed = true;
     switch (jobName) {
       case "Citizen":     // 市民
       case "Prophet":     // 予言者
@@ -44,29 +46,33 @@ public class Job {
   }
 
   public String Work(GamePlayer gamePlayer) {
-    plugin.getLogger().info(jobName);
-    if (jobName == "Prophet") {
-      if (gamePlayer.getLife()) {
-        if (gamePlayer.getJob().jobName == "Werewolf") {
-          return "この人は人狼です";
+    if (!isUsed) {
+      isUsed = true;
+      if (jobName == "Prophet") {
+        if (gamePlayer.getLife()) {
+          if (gamePlayer.getJob().jobName == "Werewolf") {
+            return "この人は人狼です";
+          } else {
+            return "この人は人狼ではありません";
+          }
         } else {
-          return "この人は人狼ではありません";
+          return "この人は死んでいます";
+        }
+      } else if (jobName.equals("Necromancer")) {
+        if (gamePlayer.getLife()) {
+          return "この人は生きています";
+        } else {
+          if (gamePlayer.getJob().jobName == "Werewolf") {
+            return "この人は人狼です";
+          } else {
+            return "この人は人狼ではありません";
+          }
         }
       } else {
-        return "この人は死んでいます";
+        return "あなたの役職は特別な仕事がありません";
       }
-    } else if (jobName.equals("Necromancer")) {
-      if (gamePlayer.getLife()) {
-        return "この人は生きています";
-      } else {
-        if (gamePlayer.getJob().jobName == "Werewolf") {
-          return "この人は人狼です";
-        } else {
-          return "この人は人狼ではありません";
-        }
-      }
-    } else {
-      return "あなたの役職は特別な仕事がありません";
+    }else{
+      return "もう仕事はできません";
     }
   }
 }
