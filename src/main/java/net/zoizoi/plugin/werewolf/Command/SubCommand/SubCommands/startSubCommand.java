@@ -3,10 +3,7 @@ package net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands;
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Main;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
@@ -185,6 +182,13 @@ public class startSubCommand {
       }
       // }
     }, (5 * 20));
+
+    // 25秒後
+    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+      public void run() {
+        player.getWorld().setPVP(true);
+      }
+    }, (25 * 20));
     return true;
   }
 }

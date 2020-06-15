@@ -23,6 +23,7 @@ public class hostSubCommand {
         p.performCommand("wolf join");
       }
     }
+    player.getWorld().setPVP(false);
     return true;
   }
 }
