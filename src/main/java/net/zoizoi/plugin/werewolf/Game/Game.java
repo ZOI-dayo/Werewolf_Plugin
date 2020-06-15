@@ -20,6 +20,7 @@ public class Game {
 
   public boolean isReady = false;
   public boolean isRunning = false;
+  public boolean isStopped = false;
 
   public Game(Main plugin) {
     this.plugin = plugin;
@@ -140,6 +141,7 @@ public class Game {
 
   public void Stop() {
     isRunning = false;
+    isStopped = true;
   }
 
   public String getResult() {

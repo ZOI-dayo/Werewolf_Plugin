@@ -52,13 +52,15 @@ public final class Main extends JavaPlugin {
         if (SubCommandMaster.gameManager.isHosted) {
           if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isRunning) { // ゲーム中
             commands = new ArrayList<>(Arrays.asList("job", "reset", "work"));
+          } else if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isStopped) { // 終了後
+            commands = new ArrayList<>(Arrays.asList("reset"));
           } else if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isReady) { // Ready後、ゲーム前
             commands = new ArrayList<>(Arrays.asList("start", "reset"));
           } else if (SubCommandMaster.gameManager.isHosted) { // Host後、Ready前
             if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).getPlayers().containsKey(player)) {
-              commands = new ArrayList<>(Arrays.asList("cancel", "ready"));
+              commands = new ArrayList<>(Arrays.asList("cancel", "ready", "reset"));
             } else {
-              commands = new ArrayList<>(Arrays.asList("join", "ready"));
+              commands = new ArrayList<>(Arrays.asList("join", "ready", "reset"));
             }
           } else { // Host前
             commands = new ArrayList<>(Arrays.asList("host"));
