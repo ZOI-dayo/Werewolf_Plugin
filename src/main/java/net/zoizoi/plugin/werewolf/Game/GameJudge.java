@@ -66,14 +66,19 @@ public class GameJudge implements Listener {
           //*/
         }
       } else {
+        /*
         Location quitLobby = new Location(death.getWorld(),
           plugin.config.getDouble("Location.quitLobby.x"),
           plugin.config.getDouble("Location.quitLobby.y"),
           plugin.config.getDouble("Location.quitLobby.z"));
         death.teleport(quitLobby);
+         */
+        death.setGameMode(GameMode.SPECTATOR);
         death.sendMessage("あなたは死にました");
         death.sendMessage("DiscordのVCを切ってください");
       }
     }
   }
+}
+
 }
