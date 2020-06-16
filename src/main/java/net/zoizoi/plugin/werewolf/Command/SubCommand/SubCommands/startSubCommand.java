@@ -4,6 +4,9 @@ import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Main;
 import org.bukkit.*;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.command.Command;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
@@ -23,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 public class startSubCommand {
+  public int leftTime = 20;
+
   public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID) {
     // 0秒後
     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
@@ -183,9 +188,27 @@ public class startSubCommand {
       // }
     }, (5 * 20));
 
+    BossBar invincibleTime = plugin.getServer().createBossBar("無敵時間", BarColor.RED, BarStyle.SOLID);
+    for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+      invincibleTime.addPlayer(p);
+    }
+    Runnable TimeCount = new Runnable() {
+      @Override
+      public void run() {
+        invincibleTime.setProgress((float) leftTime / 20);
+        leftTime--;
+      }
+    };
+    for (int i = 0; i < 20; i++) {
+      Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, TimeCount, (5 + i) * 20);
+      plugin.getLogger().info("" + (5 + i) * 20);
+    }
+
     // 25秒後
     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
       public void run() {
+        invincibleTime.setProgress(0);
+        invincibleTime.removeAll();
         player.getWorld().setPVP(true);
       }
     }, (25 * 20));
