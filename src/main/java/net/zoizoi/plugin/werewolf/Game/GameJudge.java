@@ -81,4 +81,3 @@ public class GameJudge implements Listener {
   }
 }
 
-}
