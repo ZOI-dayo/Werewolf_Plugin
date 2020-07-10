@@ -113,4 +113,4 @@ public final class Main extends JavaPlugin {
 //TODO #11 README.mdの更新
 //TODO #12 館のチェストに個人所有することの是非
 //TODO -- #13 ReadyなしでStartできる
-//TODO 複数ゲーム時
+//TODO - 複数ゲーム時

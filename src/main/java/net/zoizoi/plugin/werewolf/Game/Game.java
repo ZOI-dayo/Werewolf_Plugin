@@ -18,6 +18,7 @@ public class Game {
   private LinkedHashMap<Player, GamePlayer> wolfPlayerList = new LinkedHashMap<Player, GamePlayer>();
   private LinkedHashMap<Player, GamePlayer> betrayerPlayerList = new LinkedHashMap<Player, GamePlayer>();
 
+  public boolean isCreated = false;
   public boolean isReady = false;
   public boolean isRunning = false;
   public boolean isStopped = false;
@@ -25,6 +26,7 @@ public class Game {
   public Game(Main plugin) {
     this.plugin = plugin;
     Result = "";
+    isCreated = true;
   }
 
   public boolean AddPlayer(Player player) {
@@ -32,6 +34,9 @@ public class Game {
       // 既に含まれている場合
       return false;
     } else {
+      for (Player p : playerList.keySet()) {
+        p.sendMessage("ゲームに" + player.getName() + "さんが参加しました");
+      }
       GamePlayer gamePlayer = new GamePlayer(plugin, player);
       playerList.put(player, gamePlayer);
       return true;
