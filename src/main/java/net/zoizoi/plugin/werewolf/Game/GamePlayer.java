@@ -8,6 +8,7 @@ public class GamePlayer {
   private org.bukkit.entity.Player player;
   private boolean life = true;
   private Job job;
+  private boolean isWorked = false;
 
   public GamePlayer(Main plugin, Player player, Boolean life, Job job) {
     this.plugin = plugin;
@@ -38,5 +39,12 @@ public class GamePlayer {
 
   public Job getJob() {
     return this.job;
+  }
+
+  public boolean isWorked() {
+    return isWorked;
+  }
+  public void setWorked(boolean isWorked) {
+    this.isWorked = isWorked;
   }
 }

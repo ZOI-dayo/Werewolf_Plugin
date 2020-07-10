@@ -104,13 +104,13 @@ public final class Main extends JavaPlugin {
 //TODO #2 /wolf reset の処理を改善する
 //TODO #3 /wolf reset を常に補完に出す
 //TODO #4 死んだ後の処理
-//TODO #5 ロビーにいる間無敵にする
-//TODO #6 占い、霊媒の回数制限
-//TODO #7 開始直後無敵
+//TODO -- #5 ロビーにいる間無敵にする
+//TODO -- #6 占い、霊媒の回数制限
+//TODO -- #7 開始直後無敵
 //TODO #8 ゲーム中の満腹度に関して
 //TODO #9 館の保護
 //TODO #10 バージョン管理
 //TODO #11 README.mdの更新
 //TODO #12 館のチェストに個人所有することの是非
-//TODO #13 ReadyなしでStartできる
+//TODO -- #13 ReadyなしでStartできる
 //TODO 複数ゲーム時

@@ -11,8 +11,13 @@ public class workSubCommand {
       player.sendMessage("オプションが不足しています");
       return false;
     } else {
-      Player target = plugin.getServer().getPlayer(args[1]);
-      player.sendMessage(gameManager.getGame(GameID).getPlayers().get(player).getJob().Work(gameManager.getGame(GameID).getPlayers().get(target)));
+      if (gameManager.getGame(GameID).getPlayers().get(player).isWorked()) {
+        player.sendMessage("あなたは既に仕事を行っています");
+      } else {
+        Player target = plugin.getServer().getPlayer(args[1]);
+        player.sendMessage(gameManager.getGame(GameID).getPlayers().get(player).getJob().Work(gameManager.getGame(GameID).getPlayers().get(target)));
+        gameManager.getGame(GameID).getPlayers().get(player).setWorked(true);
+      }
     }
     return true;
   }
