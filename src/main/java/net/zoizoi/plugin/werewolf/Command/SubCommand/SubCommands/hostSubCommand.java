@@ -4,6 +4,7 @@ import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Main;
 import net.zoizoi.plugin.werewolf.utls.TextUtils;
 import org.bukkit.ChatColor;
+import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -27,6 +28,7 @@ public class hostSubCommand {
     player.getWorld().setPVP(false);
     player.getWorld().setGameRule(GameRule.KEEP_INVENTORY,true);
     player.getWorld().setGameRule(GameRule.SHOW_DEATH_MESSAGES,false);
+    player.getWorld().setDifficulty(Difficulty.PEACEFUL);
     return true;
   }
 }

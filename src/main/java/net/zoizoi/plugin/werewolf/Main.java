@@ -107,7 +107,7 @@ public final class Main extends JavaPlugin {
 //TODO -- #5 ロビーにいる間無敵にする
 //TODO -- #6 占い、霊媒の回数制限
 //TODO -- #7 開始直後無敵
-//TODO #8 ゲーム中の満腹度に関して
+//TODO - #8 ゲーム中の満腹度に関して
 //TODO #9 館の保護
 //TODO #10 バージョン管理
 //TODO #11 README.mdの更新
