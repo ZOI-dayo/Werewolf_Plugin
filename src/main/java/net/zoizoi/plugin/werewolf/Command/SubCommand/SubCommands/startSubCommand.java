@@ -153,7 +153,7 @@ public class startSubCommand {
         ItemStack Potion_Damage_Lingering = new ItemStack(Material.LINGERING_POTION, 1);
         PotionMeta Potion_Damage_Lingering_Meta = (PotionMeta) Potion_Damage_Lingering.getItemMeta();
         Potion_Damage_Lingering_Meta.setDisplayName("一撃必殺の残留ポーション");
-        Potion_Damage_Lingering_Meta.addCustomEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 600, 1), true);
+        Potion_Damage_Lingering_Meta.addCustomEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 200, 1), true);
         Potion_Damage_Lingering.setItemMeta(Potion_Damage_Lingering_Meta); // Set Meta
         RundomItems.add(Potion_Damage_Lingering);
         // すごいちくわ
