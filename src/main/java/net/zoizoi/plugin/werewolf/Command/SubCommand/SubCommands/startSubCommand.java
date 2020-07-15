@@ -183,7 +183,7 @@ public class startSubCommand {
           p.sendTitle("開始", "ゲームが開始されました", 10, 50, 10);
           p.teleport(gameStage);
           p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
-          p.setHealth(1);
+          p.setHealth(20);
         }
       }
       // }
