@@ -45,7 +45,12 @@ public class GamePlayer {
   }
 
   public boolean isWorked() {
-    plugin.getLogger().info(player.getName() + " isWorked() isWorked = " + isWorked);
+    plugin
+      .getLogger()
+      .info(
+        player.getName()
+          + " isWorked() isWorked = "
+          + isWorked);
     return isWorked;
   }
 
