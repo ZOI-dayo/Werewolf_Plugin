@@ -27,7 +27,7 @@ public class hostSubCommand {
           p.sendMessage("人狼ゲームの募集が開始されました");
           TextUtils.sendHoverText(p, ChatColor.GREEN + "＞＞＞このメッセージを押して参加＜＜＜", "人狼ゲームに参加する", "/wolf join");
         } else {
-          p.performCommand("wolf join");
+          // p.performCommand("wolf join");
         }
       }
       player.getWorld().setPVP(false);
