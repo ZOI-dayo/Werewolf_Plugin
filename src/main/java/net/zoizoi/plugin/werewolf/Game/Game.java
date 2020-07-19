@@ -30,7 +30,9 @@ public class Game {
   }
 
   public boolean AddPlayer(Player player) {
-    plugin.getLogger().info("Add Player : " + player.getName());
+    plugin
+      .getLogger()
+      .info("Add Player : " + player.getName());
     if (playerList.containsKey(player)) {
       // 既に含まれている場合
       return false;
