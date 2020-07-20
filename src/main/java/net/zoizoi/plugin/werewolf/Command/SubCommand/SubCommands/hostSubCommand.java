@@ -26,7 +26,7 @@ public class hostSubCommand {
           p.sendTitle("人狼ゲームに参加できます", "/wolf join で参加", 10, 50, 10);
           p.sendMessage("人狼ゲームの募集が開始されました");
           TextUtils.sendHoverText(p, ChatColor.GREEN + "＞＞＞このメッセージを押して参加＜＜＜", "人狼ゲームに参加する", "/wolf join");
-        } else {
+        // } else {
           // p.performCommand("wolf join");
         }
       }
