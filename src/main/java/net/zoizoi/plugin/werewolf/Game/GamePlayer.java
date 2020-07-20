@@ -45,17 +45,10 @@ public class GamePlayer {
   }
 
   public boolean isWorked() {
-    plugin
-      .getLogger()
-      .info(
-        player.getName()
-          + " isWorked() isWorked = "
-          + isWorked);
     return isWorked;
   }
 
   public void setWorked(boolean isWorked) {
-    plugin.getLogger().info(player.getName() + " setWorked() isWorked = " + isWorked);
     this.isWorked = isWorked;
   }
 }

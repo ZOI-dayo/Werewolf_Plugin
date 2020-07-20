@@ -13,7 +13,6 @@ public class workSubCommand {
     } else {
       if (gameManager.getGame(GameID).getPlayers().get(player).isWorked()) {
         player.sendMessage("あなたは既に仕事を行っています");
-        plugin.getLogger().info("あなたは既に仕事を行っています");
       } else {
         Player target = plugin.getServer().getPlayer(args[1]);
         player.sendMessage(gameManager.getGame(GameID).getPlayers().get(player).getJob().Work(gameManager.getGame(GameID).getPlayers().get(target)));
