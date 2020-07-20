@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 
 public class hostSubCommand {
   public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID) {
-    if (gameManager.getGame(GameID).isCreated) {
+    if(gameManager.isHosted){
+    // if (gameManager.getGame(GameID).isCreated) {
       player.sendMessage("人狼ゲームは開始されています");
     } else {
       GameID = gameManager.AddGame();

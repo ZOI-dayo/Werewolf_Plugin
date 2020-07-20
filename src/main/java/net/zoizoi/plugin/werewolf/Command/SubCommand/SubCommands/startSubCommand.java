@@ -167,7 +167,7 @@ public class startSubCommand {
         ItemStack Potion_Blindness_Lingering = new ItemStack(Material.LINGERING_POTION, 3);
         PotionMeta Potion_Blindness_Lingering_Meta = (PotionMeta) Potion_Blindness_Lingering.getItemMeta();
         Potion_Blindness_Lingering_Meta.setDisplayName("盲目の残留ポーション");
-        Potion_Blindness_Lingering_Meta.addCustomEffect(new PotionEffect(PotionEffectType.BLINDNESS, 600, 1), true);
+        Potion_Blindness_Lingering_Meta.addCustomEffect(new PotionEffect(PotionEffectType.BLINDNESS, 200, 1), true);
         Potion_Blindness_Lingering.setItemMeta(Potion_Blindness_Lingering_Meta); // Set Meta
         RundomItems.add(Potion_Blindness_Lingering);
         //
@@ -183,7 +183,7 @@ public class startSubCommand {
           p.sendTitle("開始", "ゲームが開始されました", 10, 50, 10);
           p.teleport(gameStage);
           p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
-          p.setHealth(1);
+          p.setHealth(20);
         }
       }
       // }
