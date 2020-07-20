@@ -16,19 +16,22 @@ public class GamePlayer {
     this.life = life;
     this.job = job;
   }
-  public GamePlayer(Main plugin,Player player){
+
+  public GamePlayer(Main plugin, Player player) {
     this.plugin = plugin;
     this.player = player;
     this.life = true;
-    this.job = new Job(plugin,"None");
+    this.job = new Job(plugin, "None");
   }
 
   public org.bukkit.entity.Player getPlayer() {
     return this.player;
   }
+
   public void setLife(boolean life) {
     this.life = life;
   }
+
   public boolean getLife() {
     return this.life;
   }
@@ -44,6 +47,7 @@ public class GamePlayer {
   public boolean isWorked() {
     return isWorked;
   }
+
   public void setWorked(boolean isWorked) {
     this.isWorked = isWorked;
   }
