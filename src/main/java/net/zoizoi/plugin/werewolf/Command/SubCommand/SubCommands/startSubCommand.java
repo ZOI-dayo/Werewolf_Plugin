@@ -2,6 +2,7 @@ package net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands;
 
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Game.GameManager;
+import net.zoizoi.plugin.werewolf.Game.GamePlayer;
 import net.zoizoi.plugin.werewolf.Main;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
@@ -213,6 +214,20 @@ public class startSubCommand {
         player.getWorld().setPVP(true);
       }
     }, (25 * 20));
+    Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+      public void run() {
+        //処理
+        // 狂人用　人狼の痕跡
+        ItemStack TraceOfWerewolf = new ItemStack(Material.RABBIT_HIDE, 1);
+        for(GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()){
+          if(GamePlayer_Betrayer.getJob().getJobName() == "Betrayer"){
+            Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();
+            Player_Betrayer.getInventory().addItem(TraceOfWerewolf);
+          }
+        }
+
+      }
+    }, (95 * 20));
     return true;
   }
 }
