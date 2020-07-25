@@ -1,4 +1,4 @@
-package net.zoizoi.plugin.werewolf.utls;
+package net.zoizoi.plugin.werewolf.utils;
 
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;

@@ -1,8 +1,7 @@
 package net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands;
 
 import net.zoizoi.plugin.werewolf.Game.GameManager;
-import net.zoizoi.plugin.werewolf.Main;
-import net.zoizoi.plugin.werewolf.utls.TextUtils;
+import net.zoizoi.plugin.werewolf.utils.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
