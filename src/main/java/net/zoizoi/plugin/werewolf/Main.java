@@ -3,6 +3,7 @@ package net.zoizoi.plugin.werewolf;
 import net.zoizoi.plugin.werewolf.Command.CommandMaster;
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Game.GameJudge;
+import net.zoizoi.plugin.werewolf.System.PluginEventsListener;
 import net.zoizoi.plugin.werewolf.System.PluginTabCompleter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -33,7 +34,8 @@ public final class Main extends JavaPlugin {
     getCommand("wolf").setTabCompleter(new PluginTabCompleter(this));
     //getCommand("wolf").setTabCompleter(this); // バックアップ
     // マイクラ内でのイベントをどこで処理するかSpigotに教える この場合GameJudge
-    getServer().getPluginManager().registerEvents(new GameJudge(this), this);
+    getServer().getPluginManager().registerEvents(new PluginEventsListener(this), this);
+    // getServer().getPluginManager().registerEvents(new GameJudge(this), this);
   }
 
   @Override
