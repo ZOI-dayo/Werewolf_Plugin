@@ -11,15 +11,16 @@ import org.bukkit.command.Command;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.plugin.Plugin;
 
 import java.util.Objects;
 
 public class SubCommandMaster {
-  public static Main plugin;
+  public static Plugin plugin;
   public static GameManager gameManager = new GameManager(plugin);
   public static int GameID = 0;
 
-  public SubCommandMaster(Main plugin) {
+  public SubCommandMaster(Plugin plugin) {
     this.plugin = plugin;
   }
 

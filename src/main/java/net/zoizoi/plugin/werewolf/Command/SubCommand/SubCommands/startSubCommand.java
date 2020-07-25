@@ -31,7 +31,7 @@ public class startSubCommand {
   public int StartCountDownTime = 5;
   public int leftTime = 20;
 
-  public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID) {
+  public boolean OnCommand(Player player, Command command, String label, String[] args, Plugin plugin, GameManager gameManager, int GameID) {
     // 0~4秒後
     Runnable StartCountDown = new Runnable() {
       @Override

@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ import java.util.List;
 import static org.bukkit.Bukkit.getLogger;
 
 public class CommandMaster implements CommandExecutor {
-  Main plugin;
-  public CommandMaster(Main plugin) {
+  Plugin plugin;
+  public CommandMaster(Plugin plugin) {
     this.plugin = plugin;
   }
 

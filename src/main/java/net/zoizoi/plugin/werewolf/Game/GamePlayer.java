@@ -2,22 +2,23 @@ package net.zoizoi.plugin.werewolf.Game;
 
 import net.zoizoi.plugin.werewolf.Main;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 public class GamePlayer {
-  Main plugin;
+  Plugin plugin;
   private org.bukkit.entity.Player player;
   private boolean life = true;
   private Job job;
   private boolean isWorked = false;
 
-  public GamePlayer(Main plugin, Player player, Boolean life, Job job) {
+  public GamePlayer(Plugin plugin, Player player, Boolean life, Job job) {
     this.plugin = plugin;
     this.player = player;
     this.life = life;
     this.job = job;
   }
 
-  public GamePlayer(Main plugin, Player player) {
+  public GamePlayer(Plugin plugin, Player player) {
     this.plugin = plugin;
     this.player = player;
     this.life = true;

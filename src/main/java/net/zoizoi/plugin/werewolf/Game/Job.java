@@ -1,14 +1,16 @@
 package net.zoizoi.plugin.werewolf.Game;
 
 import net.zoizoi.plugin.werewolf.Main;
+import net.zoizoi.plugin.werewolf.System.PluginConfig;
+import org.bukkit.plugin.Plugin;
 
 public class Job {
-  Main plugin;
+  Plugin plugin;
   private String jobName;
   private String camp;
   private boolean isUsed;
 
-  public Job(Main plugin, String jobName) {
+  public Job(Plugin plugin, String jobName) {
     this.plugin = plugin;
     this.jobName = jobName;
     this.isUsed = true;
@@ -37,7 +39,7 @@ public class Job {
   }
 
   public String getJobNameJapanese() {
-    return plugin.config.getString("japanese.jobs." + jobName);
+    return PluginConfig.config.getString("japanese.jobs." + jobName);
   }
 
 
