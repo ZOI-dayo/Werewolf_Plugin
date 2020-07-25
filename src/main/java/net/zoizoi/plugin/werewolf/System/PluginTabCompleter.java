@@ -1,48 +1,22 @@
-package net.zoizoi.plugin.werewolf;
+package net.zoizoi.plugin.werewolf.System;
 
-import net.zoizoi.plugin.werewolf.Command.CommandMaster;
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
-import net.zoizoi.plugin.werewolf.Game.GameJudge;
-import net.zoizoi.plugin.werewolf.System.PluginTabCompleter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.Plugin;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public final class Main extends JavaPlugin {
-  public FileConfiguration config;
-
-  @Override
-  public void onEnable() {
-    // Plugin 読み込み時の処理
-
-    // config.ymlが存在しない場合はファイルに出力します。
-    saveDefaultConfig();
-    // config.ymlを読み込みます。
-    config = getConfig();
-
-    // コンソールに出力
-    getLogger().info("WereWolf Pluginが読み込まれました");
-    // wolfコマンドをどこで処理するかSpigotに教える この場合CommandMaster
-    getCommand("wolf").setExecutor(new CommandMaster(this));
-    // wolfコマンドのTabキーでの補完をどこで処理するかSpigotに教える この場合PluginTabCompleter
-    getCommand("wolf").setTabCompleter(new PluginTabCompleter(this));
-    //getCommand("wolf").setTabCompleter(this); // バックアップ
-    // マイクラ内でのイベントをどこで処理するかSpigotに教える この場合GameJudge
-    getServer().getPluginManager().registerEvents(new GameJudge(this), this);
+public class PluginTabCompleter implements TabCompleter {
+  Plugin plugin;
+  public PluginTabCompleter(Plugin plugin){
+    this.plugin = plugin;
   }
 
-  @Override
-  public void onDisable() {
-    // Plugin 終了時の処理
-    getLogger().info("プラグインが無効になったよ!");
-  }
-  // net.zoizoi.plugin.werewolf.System.PluginTabCompleterへ移転
-  /*
   @Override
   // Tabキーでの補完処理
   public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
@@ -53,7 +27,7 @@ public final class Main extends JavaPlugin {
       // wolfコマンド以外の場合
       if (!command.getName().equalsIgnoreCase("wolf")) {
         // 後の処理はSpigotに任せて処理を終わる
-        return super.onTabComplete(sender, command, alias, args);
+        return plugin.onTabComplete(sender, command, alias, args);
       } else { // wolfコマンドの場合
         // (wolf の次に続く奴のメモ)
         List<String> commands = new ArrayList<>(Arrays.asList("host", "join", "cancel", "ready", "start", "job", "reset", "work"));
@@ -92,7 +66,7 @@ public final class Main extends JavaPlugin {
         // 実際に表示するものを入れる「リスト」 String型の変数をいっぱい入れられる
         List<String> Answer = new ArrayList<>();
         // デバッグ用、いらない
-        getLogger().info("" + args.length);
+        plugin.getLogger().info("" + args.length);
         // /wolf の後、スペースがある時
         // つまり"/wolf "とか"/wolf h"とかの時。
         if (args.length == 1) {
@@ -113,7 +87,7 @@ public final class Main extends JavaPlugin {
           // XXXが"work"のとき
           if (args[0].equals("work")) {
             // デバッグ用、いらない
-            getLogger().info("null!!!!!!!");
+            plugin.getLogger().info("null!!!!!!!");
             // Spigotに任せる。(プレイヤー名の一覧が出る)
             return null;
           } else { // XXXが"work"でない時
@@ -127,8 +101,7 @@ public final class Main extends JavaPlugin {
       }
     } else { // wolfコマンド以外の時
       // 後の処理はSpigotに任せて処理を終わる
-      return super.onTabComplete(sender, command, alias, args);
+      return plugin.onTabComplete(sender, command, alias, args);
     }
   }
-  */
 }

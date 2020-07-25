@@ -14,7 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-public class GameJudge implements Listener {
+public class GameJudge{
   private Main plugin;
   private GameManager gameManager;
   private int GameID;
@@ -23,7 +23,6 @@ public class GameJudge implements Listener {
     this.plugin = plugin;
   }
 
-  @EventHandler
   public void onDeath(PlayerDeathEvent e) {
     this.gameManager = SubCommandMaster.gameManager;
     this.GameID = SubCommandMaster.GameID;
