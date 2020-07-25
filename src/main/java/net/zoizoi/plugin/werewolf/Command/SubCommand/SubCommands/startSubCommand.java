@@ -1,6 +1,7 @@
 package net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands;
 
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
+import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.Start.StartItems;
 import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Game.GamePlayer;
 import net.zoizoi.plugin.werewolf.Main;
@@ -83,6 +84,10 @@ public class startSubCommand {
     // 5秒後
     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
       public void run() {
+        StartItems startItems = new StartItems();
+        startItems.GiveItems(plugin, player, gameManager, GameID);
+        // net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.Start.StartItems へ移転
+        /*
         gameManager.getGame(GameID).Start(plugin);
         // ステージへテレポート
         Location gameStage = new Location(player.getWorld(),
@@ -186,6 +191,7 @@ public class startSubCommand {
           p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
           p.setHealth(20);
         }
+        */
       }
       // }
     }, (5 * 20));
@@ -219,8 +225,8 @@ public class startSubCommand {
         //処理
         // 狂人用　人狼の痕跡
         ItemStack TraceOfWerewolf = new ItemStack(Material.RABBIT_HIDE, 1);
-        for(GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()){
-          if(GamePlayer_Betrayer.getJob().getJobName() == "Betrayer"){
+        for (GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()) {
+          if (GamePlayer_Betrayer.getJob().getJobName() == "Betrayer") {
             Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();
             Player_Betrayer.getInventory().addItem(TraceOfWerewolf);
           }
