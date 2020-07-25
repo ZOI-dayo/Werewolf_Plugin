@@ -241,8 +241,10 @@ public class startSubCommand {
     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
       public void run() {
         //処理
-        // 狂人用　人狼の痕跡
+        // 狂人用 人狼の痕跡
         ItemStack TraceOfWerewolf = new ItemStack(Material.RABBIT_HIDE, 1);
+        ItemMeta TraceOfWerewolf_Meta = TraceOfWerewolf.getItemMeta();
+        TraceOfWerewolf_Meta.setDisplayName("人狼の痕跡");
         for (GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()) {
           if (GamePlayer_Betrayer.getJob().getJobName() == "Betrayer") {
             Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();
