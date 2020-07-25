@@ -28,9 +28,26 @@ import java.util.List;
 import java.util.Map;
 
 public class startSubCommand {
+  public int StartCountDownTime = 5;
   public int leftTime = 20;
 
   public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID) {
+    // 0~4秒後
+    Runnable StartCountDown = new Runnable() {
+      @Override
+      public void run() {
+        for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+          p.playSound(p.getLocation(), Sound.BLOCK_LEVER_CLICK, 1, 1);
+          p.sendMessage(StartCountDownTime + "秒前...");
+          p.sendTitle(StartCountDownTime + "秒前", "", 10, 20, 10);
+        }
+        StartCountDownTime--;
+      }
+    };
+    for (int i = 0; i < 5; i++) {
+      plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, StartCountDown, (i * 20));
+    }
+    /*
     // 0秒後
     plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
       public void run() {
@@ -81,6 +98,7 @@ public class startSubCommand {
         }
       }
     }, (4 * 20));
+    */
     // 5秒後
     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
       public void run() {
