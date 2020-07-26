@@ -150,6 +150,9 @@ public class Game {
   public void Stop() {
     isRunning = false;
     isStopped = true;
+    for (Player player : playerList.keySet()) {
+      player.setPlayerListName(player.getName());
+    }
   }
 
   public String getResult() {
