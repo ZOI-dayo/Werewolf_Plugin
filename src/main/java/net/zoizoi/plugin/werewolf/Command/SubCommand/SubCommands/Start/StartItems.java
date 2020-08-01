@@ -2,7 +2,6 @@ package net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.Start;
 
 import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Main;
-import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -13,8 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -23,13 +20,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class StartItems {
-  public void GiveItems(JavaPlugin plugin, Player player, GameManager gameManager, int GameID) {
+  public void GiveItems(Main plugin, Player player, GameManager gameManager, int GameID) {
     gameManager.getGame(GameID).Start(plugin);
     // ステージへテレポート
     Location gameStage = new Location(player.getWorld(),
-      PluginConfig.config.getDouble("Location.gameStage.x"),
-      PluginConfig.config.getDouble("Location.gameStage.y"),
-      PluginConfig.config.getDouble("Location.gameStage.z"));
+      plugin.config.getDouble("Location.gameStage.x"),
+      plugin.config.getDouble("Location.gameStage.y"),
+      plugin.config.getDouble("Location.gameStage.z"));
     // ゲームに参加しているプレイヤー全員に対して
     for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
       Inventory inventory = p.getInventory();

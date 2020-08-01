@@ -19,7 +19,6 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -32,7 +31,7 @@ public class startSubCommand {
   public int StartCountDownTime = 5;
   public int leftTime = 20;
 
-  public boolean OnCommand(Player player, Command command, String label, String[] args, JavaPlugin plugin, GameManager gameManager, int GameID) {
+  public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID) {
     // 0~4秒後
     Runnable StartCountDown = new Runnable() {
       @Override
@@ -242,10 +241,8 @@ public class startSubCommand {
     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
       public void run() {
         //処理
-        // 狂人用 人狼の痕跡
+        // 狂人用　人狼の痕跡
         ItemStack TraceOfWerewolf = new ItemStack(Material.RABBIT_HIDE, 1);
-        ItemMeta TraceOfWerewolf_Meta = TraceOfWerewolf.getItemMeta();
-        TraceOfWerewolf_Meta.setDisplayName("人狼の痕跡");
         for (GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()) {
           if (GamePlayer_Betrayer.getJob().getJobName() == "Betrayer") {
             Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();

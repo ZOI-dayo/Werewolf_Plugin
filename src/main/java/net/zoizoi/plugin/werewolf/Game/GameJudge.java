@@ -2,7 +2,6 @@ package net.zoizoi.plugin.werewolf.Game;
 
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Main;
-import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.GameMode;
@@ -14,15 +13,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class GameJudge{
-  private JavaPlugin plugin;
+  private Main plugin;
   private GameManager gameManager;
   private int GameID;
 
-  public GameJudge(JavaPlugin plugin) {
+  public GameJudge(Main plugin) {
     this.plugin = plugin;
   }
 
@@ -37,10 +34,10 @@ public class GameJudge{
         for (Player player : gameManager.getGame(GameID).getPlayers().keySet()) {
           player.getInventory().clear();
           player.setGameMode(GameMode.SPECTATOR);
-          plugin.getLogger().info(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()));
-          player.sendTitle(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);
+          plugin.getLogger().info(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()));
+          player.sendTitle(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);
           player.sendMessage("+-----------+");
-          player.sendMessage("| " + PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利 |");
+          player.sendMessage("| " + plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利 |");
           player.sendMessage("+-----------+");
           player.sendMessage("");
           player.sendMessage("今回の役職配分");

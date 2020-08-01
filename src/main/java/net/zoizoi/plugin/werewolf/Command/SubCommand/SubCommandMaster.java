@@ -1,18 +1,25 @@
 package net.zoizoi.plugin.werewolf.Command.SubCommand;
 
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.*;
+import net.zoizoi.plugin.werewolf.Game.Game;
 import net.zoizoi.plugin.werewolf.Game.GameManager;
+import net.zoizoi.plugin.werewolf.Game.GamePlayer;
+import net.zoizoi.plugin.werewolf.Main;
+import net.zoizoi.plugin.werewolf.utls.TextUtils;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.entity.*;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.PlayerDeathEvent;
+
+import java.util.Objects;
 
 public class SubCommandMaster {
-  public static JavaPlugin plugin;
+  public static Main plugin;
   public static GameManager gameManager = new GameManager(plugin);
   public static int GameID = 0;
 
-  public SubCommandMaster(JavaPlugin plugin) {
+  public SubCommandMaster(Main plugin) {
     this.plugin = plugin;
   }
 

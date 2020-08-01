@@ -1,18 +1,16 @@
 package net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands;
 
 import net.zoizoi.plugin.werewolf.Game.GameManager;
-import net.zoizoi.plugin.werewolf.System.PluginConfig;
-import net.zoizoi.plugin.werewolf.utils.TextUtils;
+import net.zoizoi.plugin.werewolf.Main;
+import net.zoizoi.plugin.werewolf.utls.TextUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class joinSubCommand {
-  public boolean OnCommand(Player player, Command command, String label, String[] args, JavaPlugin plugin, GameManager gameManager, int GameID){
+  public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID){
     if (!gameManager.getGame(GameID).isReady) {
       if (gameManager.getGame(GameID).AddPlayer(player)) {
         player.getInventory().clear();
@@ -23,9 +21,9 @@ public class joinSubCommand {
         player.sendTitle("ゲームに参加しました", "ゲームの開始を待っています", 10, 50, 10);
         player.setGameMode(GameMode.ADVENTURE);
         Location Lobby = new Location(player.getWorld(),
-          PluginConfig.config.getDouble("Location.Lobby.x"),
-          PluginConfig.config.getDouble("Location.Lobby.y"),
-          PluginConfig.config.getDouble("Location.Lobby.z"));
+          plugin.config.getDouble("Location.Lobby.x"),
+          plugin.config.getDouble("Location.Lobby.y"),
+          plugin.config.getDouble("Location.Lobby.z"));
         player.teleport(Lobby);
       } else {
         player.sendMessage("既に参加しています");

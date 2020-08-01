@@ -11,12 +11,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class PluginEventsListener implements Listener {
-  private JavaPlugin plugin;
+  private Main plugin;
 
-  public PluginEventsListener(JavaPlugin plugin) {
+  public PluginEventsListener(Main plugin) {
     this.plugin = plugin;
   }
 

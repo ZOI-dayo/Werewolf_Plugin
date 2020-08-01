@@ -3,7 +3,6 @@ package net.zoizoi.plugin.werewolf;
 import net.zoizoi.plugin.werewolf.Command.CommandMaster;
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Game.GameJudge;
-import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import net.zoizoi.plugin.werewolf.System.PluginEventsListener;
 import net.zoizoi.plugin.werewolf.System.PluginTabCompleter;
 import org.bukkit.command.Command;
@@ -22,14 +21,10 @@ public final class Main extends JavaPlugin {
   public void onEnable() {
     // Plugin 読み込み時の処理
 
-    /*
     // config.ymlが存在しない場合はファイルに出力します。
     saveDefaultConfig();
     // config.ymlを読み込みます。
     config = getConfig();
-    */
-    PluginConfig pluginConfig = new PluginConfig(this);
-
 
     // コンソールに出力
     getLogger().info("WereWolf Pluginが読み込まれました");
