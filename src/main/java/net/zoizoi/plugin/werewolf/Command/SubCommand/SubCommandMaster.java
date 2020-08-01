@@ -5,7 +5,7 @@ import net.zoizoi.plugin.werewolf.Game.Game;
 import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Game.GamePlayer;
 import net.zoizoi.plugin.werewolf.Main;
-import net.zoizoi.plugin.werewolf.utls.TextUtils;
+import net.zoizoi.plugin.werewolf.utils.TextUtils;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.entity.*;
