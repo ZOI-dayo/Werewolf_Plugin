@@ -6,14 +6,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class PluginTabCompleter implements TabCompleter {
-  Plugin plugin;
-  public PluginTabCompleter(Plugin plugin){
+  JavaPlugin plugin;
+  public PluginTabCompleter(JavaPlugin plugin){
     this.plugin = plugin;
   }
 

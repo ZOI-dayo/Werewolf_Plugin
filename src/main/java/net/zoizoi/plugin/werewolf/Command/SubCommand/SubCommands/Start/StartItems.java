@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -22,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class StartItems {
-  public void GiveItems(Plugin plugin, Player player, GameManager gameManager, int GameID) {
+  public void GiveItems(JavaPlugin plugin, Player player, GameManager gameManager, int GameID) {
     gameManager.getGame(GameID).Start(plugin);
     // ステージへテレポート
     Location gameStage = new Location(player.getWorld(),

@@ -17,8 +17,8 @@ import java.util.List;
 import static org.bukkit.Bukkit.getLogger;
 
 public class CommandMaster implements CommandExecutor {
-  Plugin plugin;
-  public CommandMaster(Plugin plugin) {
+  JavaPlugin plugin;
+  public CommandMaster(JavaPlugin plugin) {
     this.plugin = plugin;
   }
 

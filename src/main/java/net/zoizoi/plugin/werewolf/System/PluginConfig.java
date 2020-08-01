@@ -2,11 +2,12 @@ package net.zoizoi.plugin.werewolf.System;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class PluginConfig {
   public static FileConfiguration config;
-  private static Plugin plugin;
-  public PluginConfig(Plugin plugin) {
+  private static JavaPlugin plugin;
+  public PluginConfig(JavaPlugin plugin) {
     this.plugin = plugin;
     // config.ymlが存在しない場合はファイルに出力します。
     plugin.saveDefaultConfig();

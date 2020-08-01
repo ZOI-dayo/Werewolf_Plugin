@@ -5,6 +5,7 @@ import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
@@ -13,7 +14,7 @@ import org.bukkit.scoreboard.ScoreboardManager;
 import java.util.*;
 
 public class Game {
-  Plugin plugin;
+  JavaPlugin plugin;
   private LinkedHashMap<Player, GamePlayer> playerList = new LinkedHashMap<Player, GamePlayer>();
   private String Result;
   private LinkedHashMap<Player, GamePlayer> villagePlayerList = new LinkedHashMap<Player, GamePlayer>();
@@ -25,7 +26,7 @@ public class Game {
   public boolean isRunning = false;
   public boolean isStopped = false;
 
-  public Game(Plugin plugin) {
+  public Game(JavaPlugin plugin) {
     this.plugin = plugin;
     Result = "";
     isCreated = true;
@@ -60,7 +61,7 @@ public class Game {
     return playerList;
   }
 
-  public void Start(Plugin plugin) {
+  public void Start(JavaPlugin plugin) {
     isRunning = true;
 
     List<Player> shuffledPlayerList = new ArrayList<Player>(playerList.keySet());

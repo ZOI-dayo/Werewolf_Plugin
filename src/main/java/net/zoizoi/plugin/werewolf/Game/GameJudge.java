@@ -15,13 +15,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class GameJudge{
-  private Plugin plugin;
+  private JavaPlugin plugin;
   private GameManager gameManager;
   private int GameID;
 
-  public GameJudge(Plugin plugin) {
+  public GameJudge(JavaPlugin plugin) {
     this.plugin = plugin;
   }
 

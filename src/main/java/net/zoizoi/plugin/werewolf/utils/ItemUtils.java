@@ -1,6 +1,5 @@
 package net.zoizoi.plugin.werewolf.utils;
 
-import com.sun.istack.internal.Nullable;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;

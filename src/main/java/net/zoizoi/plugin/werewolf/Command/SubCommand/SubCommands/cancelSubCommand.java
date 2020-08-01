@@ -8,9 +8,10 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class cancelSubCommand {
-  public boolean OnCommand(Player player, Command command, String label, String[] args, Plugin plugin, GameManager gameManager, int GameID){
+  public boolean OnCommand(Player player, Command command, String label, String[] args, JavaPlugin plugin, GameManager gameManager, int GameID){
     if (!gameManager.getGame(GameID).isReady) {
       if (gameManager.getGame(GameID).DeletePlayer(player)) {
         player.sendMessage("人狼ゲームから離脱しました");

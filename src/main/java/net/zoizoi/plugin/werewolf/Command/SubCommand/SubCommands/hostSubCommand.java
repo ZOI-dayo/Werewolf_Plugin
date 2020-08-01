@@ -9,9 +9,10 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class hostSubCommand {
-  public boolean OnCommand(Player player, Command command, String label, String[] args, Plugin plugin, GameManager gameManager, int GameID) {
+  public boolean OnCommand(Player player, Command command, String label, String[] args, JavaPlugin plugin, GameManager gameManager, int GameID) {
     if (gameManager.isHosted) {
       player.sendMessage("人狼ゲームは開始されています");
     } else {

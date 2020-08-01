@@ -19,6 +19,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -31,7 +32,7 @@ public class startSubCommand {
   public int StartCountDownTime = 5;
   public int leftTime = 20;
 
-  public boolean OnCommand(Player player, Command command, String label, String[] args, Plugin plugin, GameManager gameManager, int GameID) {
+  public boolean OnCommand(Player player, Command command, String label, String[] args, JavaPlugin plugin, GameManager gameManager, int GameID) {
     // 0~4秒後
     Runnable StartCountDown = new Runnable() {
       @Override

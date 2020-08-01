@@ -2,15 +2,16 @@ package net.zoizoi.plugin.werewolf.Game;
 
 import net.zoizoi.plugin.werewolf.Main;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameManager {
-  Plugin plugin;
+  JavaPlugin plugin;
   public boolean isHosted = false;
 
-  public GameManager(Plugin plugin) {
+  public GameManager(JavaPlugin plugin) {
     this.plugin = plugin;
   }
 

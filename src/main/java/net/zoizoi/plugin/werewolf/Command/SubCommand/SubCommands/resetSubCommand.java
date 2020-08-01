@@ -7,9 +7,10 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class resetSubCommand {
-  public boolean OnCommand(Player player, Command command, String label, String[] args, Plugin plugin, GameManager gameManager, int GameID) {
+  public boolean OnCommand(Player player, Command command, String label, String[] args, JavaPlugin plugin, GameManager gameManager, int GameID) {
     gameManager.DeleteGame(GameID);
     player.sendMessage("ゲームを消去しました");
     if (gameManager.getGame(GameID) != null) {

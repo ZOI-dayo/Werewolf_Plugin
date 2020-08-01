@@ -6,11 +6,12 @@ import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
 public class jobSubCommand {
-  public boolean OnCommand(Player player, Command command, String label, String[] args, Plugin plugin, GameManager gameManager, int GameID){
+  public boolean OnCommand(Player player, Command command, String label, String[] args, JavaPlugin plugin, GameManager gameManager, int GameID){
     for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
       if (p.equals(player)) {
         player.sendMessage("あなたの役職は " + gameManager.getGame(GameID).getPlayers().get(p).getJob().getJobNameJapanese() + " です");

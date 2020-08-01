@@ -5,13 +5,14 @@ import net.zoizoi.plugin.werewolf.Game.GameManager;
 import org.bukkit.command.Command;
 import org.bukkit.entity.*;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class SubCommandMaster {
-  public static Plugin plugin;
+  public static JavaPlugin plugin;
   public static GameManager gameManager = new GameManager(plugin);
   public static int GameID = 0;
 
-  public SubCommandMaster(Plugin plugin) {
+  public SubCommandMaster(JavaPlugin plugin) {
     this.plugin = plugin;
   }
 
