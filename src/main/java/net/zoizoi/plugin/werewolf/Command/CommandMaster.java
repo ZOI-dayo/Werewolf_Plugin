@@ -17,8 +17,10 @@ import static org.bukkit.Bukkit.getLogger;
 
 public class CommandMaster implements CommandExecutor {
   Main plugin;
+  SubCommandMaster subCommandMaster;
   public CommandMaster(Main plugin) {
     this.plugin = plugin;
+    subCommandMaster = new SubCommandMaster(plugin);
   }
 
   @Override
@@ -34,7 +36,6 @@ public class CommandMaster implements CommandExecutor {
           return false;
         } else {
           getLogger().info(args[0]);
-          SubCommandMaster subCommandMaster = new SubCommandMaster(plugin);
           return subCommandMaster.OnCommand(player, command, label, args);
         }
       }

@@ -16,11 +16,12 @@ import java.util.Objects;
 
 public class SubCommandMaster {
   public static Main plugin;
-  public static GameManager gameManager = new GameManager(plugin);
+  public static GameManager gameManager;
   public static int GameID = 0;
 
   public SubCommandMaster(Main plugin) {
     this.plugin = plugin;
+    gameManager = new GameManager(plugin);
   }
 
   public boolean OnCommand(Player player, Command command, String label, String[] args) {
