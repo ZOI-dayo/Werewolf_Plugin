@@ -10,25 +10,25 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class ItemUtils {
-  public ItemStack CreateItem(final Material material, final int amount){
+  public static ItemStack CreateItem(final Material material, final int amount){
     ItemStack itemStack = new ItemStack(material,amount);
     return itemStack;
   }
-  public ItemStack CreatePotion(final PotionEffectType potionEffectType, final int duration, final int amplifier, final int amount){
+  public static ItemStack CreatePotion(final PotionEffectType potionEffectType, final int duration, final int amplifier, final int amount){
     ItemStack itemStack = new ItemStack(Material.POTION,amount);
     PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
     potionMeta.addCustomEffect(new PotionEffect(potionEffectType, duration, amplifier), true);
     itemStack.setItemMeta(potionMeta);
     return itemStack;
   }
-  public ItemStack CreateLingeringPotion(final PotionEffectType potionEffectType, final int duration, final int amplifier, final int amount){
+  public static ItemStack CreateLingeringPotion(final PotionEffectType potionEffectType, final int duration, final int amplifier, final int amount){
     ItemStack itemStack = new ItemStack(Material.LINGERING_POTION,amount);
     PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
     potionMeta.addCustomEffect(new PotionEffect(potionEffectType, duration, amplifier), true);
     itemStack.setItemMeta(potionMeta);
     return itemStack;
   }
-  public ItemStack CreateSplashPotion(final PotionEffectType potionEffectType, final int duration, final int amplifier, final int amount){
+  public static ItemStack CreateSplashPotion(final PotionEffectType potionEffectType, final int duration, final int amplifier, final int amount){
     ItemStack itemStack = new ItemStack(Material.SPLASH_POTION,amount);
     PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
     potionMeta.addCustomEffect(new PotionEffect(potionEffectType, duration, amplifier), true);
@@ -36,17 +36,17 @@ public class ItemUtils {
     return itemStack;
   }
 
-  public ItemStack setName(ItemStack itemStack,String Name){
+  public static ItemStack setName(ItemStack itemStack,String Name){
     ItemMeta itemMeta = itemStack.getItemMeta();
     itemMeta.setDisplayName(Name);
     itemStack.setItemMeta(itemMeta);
     return itemStack;
   }
-  public ItemStack addEnchantment(ItemStack itemStack, Enchantment enchantment,int level){
+  public static ItemStack addEnchantment(ItemStack itemStack, Enchantment enchantment,int level){
     itemStack.addUnsafeEnchantment(enchantment,level);
     return itemStack;
   }
-  public ItemStack setDamage(ItemStack itemStack,int Damage){
+  public static ItemStack setDamage(ItemStack itemStack,int Damage){
     ItemMeta itemMeta = itemStack.getItemMeta();
     if (itemMeta instanceof Damageable) {
       ((Damageable) itemMeta).setDamage(Damage);
