@@ -2,6 +2,7 @@ package net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands;
 
 import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Main;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
@@ -12,11 +13,14 @@ public class resetSubCommand {
     player.sendMessage("ゲームを消去しました");
     if (gameManager.getGame(GameID) != null) {
       for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+        /*
         Location quitLobby = new Location(player.getWorld(),
           plugin.config.getDouble("Location.quitLobby.x"),
           plugin.config.getDouble("Location.quitLobby.y"),
           plugin.config.getDouble("Location.quitLobby.z"));
         p.teleport(quitLobby);
+         */
+        p.setGameMode(GameMode.CREATIVE);
       }
     }
     return true;
