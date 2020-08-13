@@ -31,7 +31,7 @@ public class PluginTabCompleter implements TabCompleter {
         return plugin.onTabComplete(sender, command, alias, args);
       } else { // wolfコマンドの場合
         // (wolf の次に続く奴のメモ)
-        List<String> commands = new ArrayList<>(Arrays.asList("host", "join", "cancel", "ready", "start", "job", "reset", "work"));
+        List<String> commands = new ArrayList<>(Arrays.asList("host", "join", "cancel", "ready", "start", "job", "reset", "work", "reloadConfig"));
         // もう誰かが/wolf hostしてる場合
         if (SubCommandMaster.gameManager.isHosted) {
           if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isRunning) { // ゲーム中の場合
@@ -57,8 +57,8 @@ public class PluginTabCompleter implements TabCompleter {
             commands = new ArrayList<>(Arrays.asList("host"));
           }
         } else { // まだ誰も/wolf hostしていない場合
-          // 候補に host を追加
-          commands = new ArrayList<>(Arrays.asList("host"));
+          // 候補に host と reloadConfig を追加
+          commands = new ArrayList<>(Arrays.asList("host", "reloadConfig"));
         }
 
         // 候補の中で、実際に表示するものを選別する

@@ -65,10 +65,16 @@ public class SubCommandMaster {
 
             workSubCommand work = new workSubCommand();
             return work.OnCommand(player, command, label, args, plugin, gameManager, GameID);
-        } else if (args[0].equals("waiter")) {
+        } else if (args[0].equals("reloadConfig")) {
 
+            reloadConfigSubCommand reloadConfig = new reloadConfigSubCommand();
+            return reloadConfig.OnCommand();
+        } else if (args[0].equals("waiter")) {
+            // Waiterテスト用
+            /*
             WaiterMode.setWaiter(plugin, player.getUniqueId(), true);
             return true;
+             */
         }
         return false;
     }
