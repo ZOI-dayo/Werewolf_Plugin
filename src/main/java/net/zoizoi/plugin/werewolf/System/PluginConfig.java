@@ -8,7 +8,7 @@ public class PluginConfig {
   public static FileConfiguration config;
   private static JavaPlugin plugin;
   public PluginConfig(JavaPlugin plugin) {
-    this.plugin = plugin;
+    PluginConfig.plugin = plugin;
     // config.ymlが存在しない場合はファイルに出力します。
     plugin.saveDefaultConfig();
     // config.ymlを読み込みます。

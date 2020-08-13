@@ -2,6 +2,7 @@ package net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.Start;
 
 import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Main;
+import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import net.zoizoi.plugin.werewolf.utils.ItemUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,9 +26,9 @@ public class StartItems {
         gameManager.getGame(GameID).Start(plugin);
         // ステージへテレポート
         Location gameStage = new Location(player.getWorld(),
-                plugin.config.getDouble("Location.gameStage.x"),
-                plugin.config.getDouble("Location.gameStage.y"),
-                plugin.config.getDouble("Location.gameStage.z"));
+                PluginConfig.config.getDouble("Location.gameStage.x"),
+                PluginConfig.config.getDouble("Location.gameStage.y"),
+                PluginConfig.config.getDouble("Location.gameStage.z"));
         // ゲームに参加しているプレイヤー全員に対して
         for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
             Inventory inventory = p.getInventory();

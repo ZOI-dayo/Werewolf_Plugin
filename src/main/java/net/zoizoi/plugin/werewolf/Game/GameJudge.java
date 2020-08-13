@@ -2,6 +2,9 @@ package net.zoizoi.plugin.werewolf.Game;
 
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Main;
+import net.zoizoi.plugin.werewolf.System.PluginConfig;
+import net.zoizoi.plugin.werewolf.utils.ScoreboardUtils;
+import net.zoizoi.plugin.werewolf.utils.WaiterMode;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.GameMode;
@@ -32,12 +35,16 @@ public class GameJudge{
       if (gameManager.getGame(GameID).PlayerDie(death)) {
         gameManager.getGame(GameID).Stop();
         for (Player player : gameManager.getGame(GameID).getPlayers().keySet()) {
+          ScoreboardUtils.deletePersonalScoreboard(player);
           player.getInventory().clear();
-          player.setGameMode(GameMode.SPECTATOR);
-          plugin.getLogger().info(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()));
-          player.sendTitle(plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);
+
+          // player.setGameMode(GameMode.SPECTATOR);
+          WaiterMode.setWaiter(plugin, player.getUniqueId(), true);
+
+          plugin.getLogger().info(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()));
+          player.sendTitle(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);
           player.sendMessage("+-----------+");
-          player.sendMessage("| " + plugin.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利 |");
+          player.sendMessage("| " + PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利 |");
           player.sendMessage("+-----------+");
           player.sendMessage("");
           player.sendMessage("今回の役職配分");

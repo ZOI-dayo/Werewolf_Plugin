@@ -1,6 +1,7 @@
 package net.zoizoi.plugin.werewolf.Game;
 
 import net.zoizoi.plugin.werewolf.Main;
+import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -70,29 +71,29 @@ public class Game {
         for (int i = 0; i < shuffledPlayerList.size(); i++) {
             plugin.getLogger().info("" + shuffledPlayerList.size());
             plugin.getLogger().info("i = " + i);
-            plugin.getLogger().info("Citizen = " + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen"));
-            plugin.getLogger().info("Citizen = " + plugin.config.getInt("member.2.Citizen"));
+            plugin.getLogger().info("Citizen = " + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Citizen"));
+            plugin.getLogger().info("Citizen = " + PluginConfig.config.getInt("member.2.Citizen"));
 
             Job job;
 
-            if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")) {
+            if (i < PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")) {
                 job = new Job("Citizen");
 
                 villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
 
-            } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
-                    + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")) {
+            } else if (i < PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
+                    + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")) {
                 job = new Job("Prophet");
                 villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
-            } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
-                    + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
-                    + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")) {
+            } else if (i < PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
+                    + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
+                    + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")) {
                 job = new Job("Necromancer");
                 villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
-            } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
-                    + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
-                    + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")
-                    + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Werewolf")) {
+            } else if (i < PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
+                    + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
+                    + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")
+                    + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Werewolf")) {
                 job = new Job("Werewolf");
                 wolfPlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
             } else {

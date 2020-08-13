@@ -6,7 +6,9 @@ import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Game.GamePlayer;
 import net.zoizoi.plugin.werewolf.Game.Job;
 import net.zoizoi.plugin.werewolf.Main;
+import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import net.zoizoi.plugin.werewolf.utils.ItemUtils;
+import net.zoizoi.plugin.werewolf.utils.ScoreboardUtils;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -53,6 +55,24 @@ public class startSubCommand {
                 StartItems startItems = new StartItems();
                 startItems.GiveItems(plugin, player, gameManager, GameID);
                 // net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.Start.StartItems へ移転
+
+                for (GamePlayer gp : gameManager.getGame(GameID).getPlayers().values()) {
+                    Player p = gp.getPlayer();
+                    ScoreboardUtils.createPersonalScoreboard(p,"人狼ゲーム");
+
+                    ArrayList<String> value = new ArrayList<String>(Arrays.asList("あなたの役職", gp.getJob().getJobNameJapanese()));
+                    value.add(" ");
+                    value.add("参加者");
+                    for (Player pl : gameManager.getGame(GameID).getPlayers().keySet()) {
+                        value.add(pl.getName());
+                    }
+                    // value.add(" ");
+                    // value.add(PluginConfig.config.getString("japanese.jobsExp." + gameManager.getGame(GameID).getPlayers().get(p).getJob().getJobName()));
+
+                    ScoreboardUtils.editPersonalScoreboard(p,value);
+
+                    ScoreboardUtils.showPersonalScoreboard(p);
+                }
             }
         }, (5 * 20));
 
