@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 public class reloadConfigSubCommand {
     public boolean OnCommand(Player player,Main plugin) {
-        PluginConfig.ReloadConfig();
+        PluginConfig.ReloadConfig(plugin);
         player.sendMessage("コンフィグを再読み込みしました");
         plugin.getLogger().info("WereWolf_Plugin : コンフィグを再読み込みしました");
         return true;
