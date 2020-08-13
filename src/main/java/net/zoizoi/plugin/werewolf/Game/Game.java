@@ -74,27 +74,27 @@ public class Game {
             Job job;
 
             if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")) {
-                job = new Job(plugin, "Citizen");
+                job = new Job("Citizen");
 
                 villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
 
             } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
                     + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")) {
-                job = new Job(plugin, "Prophet");
+                job = new Job("Prophet");
                 villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
             } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
                     + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
                     + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")) {
-                job = new Job(plugin, "Necromancer");
+                job = new Job("Necromancer");
                 villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
             } else if (i < plugin.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
                     + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
                     + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")
                     + plugin.config.getInt("member." + shuffledPlayerList.size() + ".Werewolf")) {
-                job = new Job(plugin, "Werewolf");
+                job = new Job("Werewolf");
                 wolfPlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
             } else {
-                job = new Job(plugin, "Betrayer");
+                job = new Job("Betrayer");
                 betrayerPlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
             }
 
@@ -145,5 +145,10 @@ public class Game {
 
     public String getResult() {
         return Result;
+    }
+
+
+    public LinkedHashMap<GamePlayer, Job> getJobPlayerList() {
+        return jobPlayerList;
     }
 }

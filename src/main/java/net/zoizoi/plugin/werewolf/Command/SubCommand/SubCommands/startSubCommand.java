@@ -4,7 +4,9 @@ import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.Start.StartItems;
 import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Game.GamePlayer;
+import net.zoizoi.plugin.werewolf.Game.Job;
 import net.zoizoi.plugin.werewolf.Main;
+import net.zoizoi.plugin.werewolf.utils.ItemUtils;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -22,10 +24,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class startSubCommand {
     public int StartCountDownTime = 5;
@@ -86,14 +85,24 @@ public class startSubCommand {
             public void run() {
                 //処理
                 // 狂人用 人狼の痕跡
-                ItemStack TraceOfWerewolf = new ItemStack(Material.RABBIT_HIDE, 1);
+                ItemStack TraceOfWerewolf;
+                TraceOfWerewolf = ItemUtils.CreateItem(Material.RABBIT_HIDE, 1); // ItemStack(Material.RABBIT_HIDE, 1);
+                /*
                 for (GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()) {
                     if (GamePlayer_Betrayer.getJob().getJobName() == "Betrayer") {
                         Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();
                         Player_Betrayer.getInventory().addItem(TraceOfWerewolf);
                     }
                 }
-
+                 */
+                LinkedHashMap<GamePlayer, Job> jobPlayerList = gameManager.getGame(GameID).getJobPlayerList();
+                if (jobPlayerList.containsValue(new Job("Betrayer"))) {
+                    jobPlayerList.forEach((gamePlayer, job) -> {
+                        if (gamePlayer.getJob().getJobName() == "Betrayer") {
+                            gamePlayer.getPlayer().getInventory().addItem(TraceOfWerewolf);
+                        }
+                    });
+                }
             }
         }, (95 * 20));
         return true;
