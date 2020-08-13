@@ -68,7 +68,7 @@ public class SubCommandMaster {
         } else if (args[0].equals("reloadConfig")) {
 
             reloadConfigSubCommand reloadConfig = new reloadConfigSubCommand();
-            return reloadConfig.OnCommand();
+            return reloadConfig.OnCommand(player, plugin);
         } else if (args[0].equals("waiter")) {
             // Waiterテスト用
             /*
