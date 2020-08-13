@@ -13,6 +13,9 @@ public class joinSubCommand {
   public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID){
     if (!gameManager.getGame(GameID).isReady) {
       if (gameManager.getGame(GameID).AddPlayer(player)) {
+        for (Player p : player.getWorld().getPlayers()) {
+          p.sendMessage("ゲームに" + player.getName() + "さんが参加しました");
+        }
         player.getInventory().clear();
         player.sendMessage("人狼ゲームに参加しました");
         TextUtils.sendHoverText(player, ChatColor.GREEN + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");

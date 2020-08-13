@@ -36,9 +36,11 @@ public class Game {
             // 既に含まれている場合
             return false;
         } else {
+            /*
             for (Player p : playerList.keySet()) {
                 p.sendMessage("ゲームに" + player.getName() + "さんが参加しました");
             }
+             */
             GamePlayer gamePlayer = new GamePlayer(plugin, player);
             playerList.put(player, gamePlayer);
             return true;
