@@ -38,8 +38,7 @@ public class GameJudge{
           ScoreboardUtils.deletePersonalScoreboard(player);
           player.getInventory().clear();
 
-          // player.setGameMode(GameMode.SPECTATOR);
-          WaiterMode.setWaiter(plugin, player.getUniqueId(), true);
+          player.setGameMode(GameMode.SPECTATOR);
 
           plugin.getLogger().info(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()));
           player.sendTitle(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);
@@ -79,7 +78,7 @@ public class GameJudge{
           plugin.config.getDouble("Location.quitLobby.z"));
         death.teleport(quitLobby);
          */
-        death.setGameMode(GameMode.SPECTATOR);
+        // WaiterMode.setWaiter(plugin, death.getUniqueId(), true);
         death.sendMessage("あなたは死にました");
         death.sendMessage("DiscordのVCを切ってください");
       }

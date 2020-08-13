@@ -105,25 +105,30 @@ public class startSubCommand {
             public void run() {
                 //処理
                 // 狂人用 人狼の痕跡
+                plugin.getLogger().info("人狼の痕跡配布");
                 ItemStack TraceOfWerewolf;
                 TraceOfWerewolf = ItemUtils.CreateItem(Material.RABBIT_HIDE, 1); // ItemStack(Material.RABBIT_HIDE, 1);
                 ItemUtils.setName(TraceOfWerewolf, "人狼の痕跡");
-                /*
                 for (GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()) {
                     if (GamePlayer_Betrayer.getJob().getJobName() == "Betrayer") {
                         Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();
                         Player_Betrayer.getInventory().addItem(TraceOfWerewolf);
                     }
                 }
-                 */
+                /*
                 LinkedHashMap<GamePlayer, Job> jobPlayerList = gameManager.getGame(GameID).getJobPlayerList();
                 if (jobPlayerList.containsValue(new Job("Betrayer"))) {
+                    plugin.getLogger().info("狂人がいます!");
                     jobPlayerList.forEach((gamePlayer, job) -> {
+                        plugin.getLogger().info(gamePlayer.getPlayer().getDisplayName()+"を検査");
                         if (gamePlayer.getJob().getJobName() == "Betrayer") {
+                            plugin.getLogger().info("こいつだ!");
                             gamePlayer.getPlayer().getInventory().addItem(TraceOfWerewolf);
                         }
                     });
                 }
+
+                 */
             }
         }, (95 * 20));
         return true;

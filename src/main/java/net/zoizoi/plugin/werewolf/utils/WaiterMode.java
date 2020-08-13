@@ -38,7 +38,10 @@ public class WaiterMode {
             player.setGameMode(GameMode.ADVENTURE);
             player.setAllowFlight(true);
             player.setFlying(true);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,2147483647 ,1));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 2147483647, 1));
+        } else {
+            player.setAllowFlight(false);
+            player.setFlying(false);
         }
     }
 }
