@@ -5,6 +5,7 @@ import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Game.GameJudge;
 import net.zoizoi.plugin.werewolf.System.PluginEventsListener;
 import net.zoizoi.plugin.werewolf.System.PluginTabCompleter;
+import net.zoizoi.plugin.werewolf.utils.WaiterMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;

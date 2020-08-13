@@ -10,8 +10,8 @@ public class GameManager {
     Main plugin;
     public boolean isHosted = false;
 
-    public GameManager(Main plugin) {
-        this.plugin = plugin;
+    public GameManager(Main Plugin) {
+        plugin = Plugin;
     }
 
     private static List<Game> gameList = new ArrayList<Game>();
@@ -35,7 +35,7 @@ public class GameManager {
     }
 
     public void DeleteGame(int ID) {
-        for (Player p: gameList.get(ID).getPlayers().keySet()) {
+        for (Player p : gameList.get(ID).getPlayers().keySet()) {
             p.setPlayerListName(p.getName());
         }
         gameList.remove(ID);
