@@ -21,7 +21,7 @@ public class GamePlayer {
         this.plugin = plugin;
         this.player = player;
         this.life = true;
-        this.job = new Job("None");
+        this.job = Job.Citizen;
     }
 
     public org.bukkit.entity.Player getPlayer() {

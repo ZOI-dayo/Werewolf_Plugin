@@ -77,27 +77,27 @@ public class Game {
             Job job;
 
             if (i < PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")) {
-                job = new Job("Citizen");
+                job = Job.Citizen;
 
                 villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
 
             } else if (i < PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
                     + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")) {
-                job = new Job("Prophet");
+                job = Job.Prophet;
                 villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
             } else if (i < PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
                     + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
                     + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")) {
-                job = new Job("Necromancer");
+                job = Job.Necromancer;
                 villagePlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
             } else if (i < PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Citizen")
                     + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Prophet")
                     + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Necromancer")
                     + PluginConfig.config.getInt("member." + shuffledPlayerList.size() + ".Werewolf")) {
-                job = new Job("Werewolf");
+                job = Job.Werewolf;
                 wolfPlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
             } else {
-                job = new Job("Betrayer");
+                job = Job.Betrayer;
                 betrayerPlayerList.put(shuffledPlayerList.get(i), playerList.get(shuffledPlayerList.get(i)));
             }
 

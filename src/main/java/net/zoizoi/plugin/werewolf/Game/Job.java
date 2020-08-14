@@ -3,12 +3,23 @@ package net.zoizoi.plugin.werewolf.Game;
 import net.zoizoi.plugin.werewolf.Main;
 import net.zoizoi.plugin.werewolf.System.PluginConfig;
 
-public class Job {
+public enum Job {
+    Citizen("Citizen"),
+    Prophet("Prophet"),
+    Necromancer("Necromancer"),
+    Werewolf("Werewolf"),
+    Betrayer("Betrayer");
+
+
+
+
+
+
     private String jobName;
     private String camp;
     // private boolean isUsed;
 
-    public Job(String jobName) {
+    private Job(final String jobName) {
         this.jobName = jobName;
         // this.isUsed = true;
         switch (jobName) {
