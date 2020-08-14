@@ -15,6 +15,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 public class PluginEventsListener implements Listener {
@@ -44,18 +45,23 @@ public class PluginEventsListener implements Listener {
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        // ウサギの皮を持っているなら{}の中を実行する
-        if (p.getInventory().getItemInMainHand().getType() == Material.RABBIT_HIDE) {
+        ItemStack item = p.getInventory().getItemInMainHand();
+        // コンパスを持っているなら{}の中を実行する
+        if (item.getType() == Material.COMPASS) {
             // そのウサギの皮の名前が"人狼の痕跡"なら{}の中を実行する
-            if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName() == "人狼の痕跡") {
+            if (item.getItemMeta().getDisplayName() == "人狼の痕跡") {
                 // 右クリックのイベントの場合(左クリックなどを除く)
                 if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
                     // つまり人狼の痕跡を持ち、右クリックされたとき
                     GameManager gameManager = SubCommandMaster.gameManager;
                     for (GamePlayer gamePlayer : gameManager.getGame(SubCommandMaster.GameID).getPlayers().values()) {
                         if (gamePlayer.getJob().getJobName() == "WereWolf") {
+                            /*
                             p.sendMessage(gamePlayer.getPlayer().getDisplayName() + "さんは人狼です!");
                             p.getInventory().setItemInMainHand(null);
+                             */
+                            p.setCompassTarget(gamePlayer.getPlayer().getLocation());
+                            p.sendMessage("今人狼がいた場所をコンパスで示しました。");
                             break;
                         }
                     }

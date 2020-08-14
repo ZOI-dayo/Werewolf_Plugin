@@ -38,6 +38,7 @@ public class StartItems {
             SuperBow = ItemUtils.CreateItem(Material.BOW, 1);
             ItemUtils.addEnchantment(SuperBow, Enchantment.ARROW_DAMAGE, 10000);
             ItemUtils.addEnchantment(SuperBow, Enchantment.ARROW_INFINITE, 10000);
+            ItemUtils.setUnbreakable(SuperBow, true);
             ItemUtils.setName(SuperBow, "一撃必殺の弓");
             inventory.addItem(SuperBow);
             // 矢
