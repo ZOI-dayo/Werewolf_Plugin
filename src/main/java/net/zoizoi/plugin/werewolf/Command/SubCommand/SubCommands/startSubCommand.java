@@ -25,6 +25,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.*;
 
@@ -71,6 +72,24 @@ public class startSubCommand {
 
                     ScoreboardUtils.editPersonalScoreboard(p,value);
 
+                    ScoreboardUtils.showPersonalScoreboard(p);
+                }
+                ArrayList<GamePlayer> Werewolfs = new ArrayList<>();
+                for (GamePlayer gp : gameManager.getGame(GameID).getPlayers().values()) {
+                    if(gp.getJob() == Job.Werewolf){
+                        Werewolfs.add(gp);
+                    }
+                }
+                for(GamePlayer gp : Werewolfs){
+                    Player p = gp.getPlayer();
+                    ArrayList<String> value = new ArrayList<String>();
+                    value.add(" ");
+                    value.add("人狼一覧:");
+                    Werewolfs.forEach(gamePlayer -> {
+                        value.add(gamePlayer.getPlayer().getName());
+                    });
+                    value.forEach(p::sendMessage);
+                    ScoreboardUtils.editPersonalScoreboard(p,value);
                     ScoreboardUtils.showPersonalScoreboard(p);
                 }
             }
