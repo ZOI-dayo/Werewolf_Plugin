@@ -1,20 +1,10 @@
 package net.zoizoi.plugin.werewolf;
 
 import net.zoizoi.plugin.werewolf.Command.CommandMaster;
-import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
-import net.zoizoi.plugin.werewolf.Game.GameJudge;
 import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import net.zoizoi.plugin.werewolf.System.PluginEventsListener;
 import net.zoizoi.plugin.werewolf.System.PluginTabCompleter;
-import net.zoizoi.plugin.werewolf.utils.WaiterMode;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public final class Main extends JavaPlugin {
   // public FileConfiguration config;

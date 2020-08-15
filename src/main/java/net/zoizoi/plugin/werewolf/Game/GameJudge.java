@@ -4,18 +4,9 @@ import net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommandMaster;
 import net.zoizoi.plugin.werewolf.Main;
 import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import net.zoizoi.plugin.werewolf.utils.ScoreboardUtils;
-import net.zoizoi.plugin.werewolf.utils.WaiterMode;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.inventory.meta.FireworkMeta;
 
 public class GameJudge{
   private Main plugin;

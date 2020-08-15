@@ -2,9 +2,7 @@ package net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands;
 
 import net.zoizoi.plugin.werewolf.Game.GameManager;
 import net.zoizoi.plugin.werewolf.Main;
-import net.zoizoi.plugin.werewolf.utils.WaiterMode;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
 
