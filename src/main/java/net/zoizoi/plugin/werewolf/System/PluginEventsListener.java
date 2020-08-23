@@ -62,7 +62,7 @@ public class PluginEventsListener implements Listener {
                         plugin.getLogger().info("PluginIventsListener: 62: " + gamePlayer.getPlayer().getName());
                         plugin.getLogger().info("PluginIventsListener: 59");
                         plugin.getLogger().info("PluginIventsListener: 64: " + gamePlayer.getJob().getJobName());
-                        if (gamePlayer.getJob().getJobName() == "WereWolf") {
+                        if (gamePlayer.getJob().getJobName() == "Werewolf") {
                             plugin.getLogger().info("PluginIventsListener: 61");
                             /*
                             p.sendMessage(gamePlayer.getPlayer().getDisplayName() + "さんは人狼です!");

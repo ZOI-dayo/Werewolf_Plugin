@@ -20,7 +20,7 @@ public final class Main extends JavaPlugin {
     config = getConfig();
 
      */
-    new PluginConfig(this);
+    PluginConfig.InitConfig(this);
 
     // コンソールに出力
     getLogger().info("WereWolf Pluginが読み込まれました");
