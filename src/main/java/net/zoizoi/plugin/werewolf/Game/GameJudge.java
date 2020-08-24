@@ -70,6 +70,7 @@ public class GameJudge{
         death.teleport(quitLobby);
          */
         // WaiterMode.setWaiter(plugin, death.getUniqueId(), true);
+        death.setGameMode(GameMode.SPECTATOR);
         death.sendMessage("あなたは死にました");
         death.sendMessage("DiscordのVCを切ってください");
       }

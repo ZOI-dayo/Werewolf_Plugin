@@ -42,9 +42,9 @@ public class PluginEventsListener implements Listener {
     public void onPlayerInteract(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         ItemStack item = p.getInventory().getItemInMainHand();
-        plugin.getLogger().info("PluginIventsListener: 45");
+        //plugin.getLogger().info("PluginIventsListener: 45");
         // コンパスを持っているなら{}の中を実行する
-        plugin.getLogger().info("PluginIventsListener: 47: " + item.getType().name());
+        //plugin.getLogger().info("PluginIventsListener: 47: " + item.getType().name());
         if (item.getType() == Material.COMPASS) {
             plugin.getLogger().info("PluginIventsListener: 48");
             // そのウサギの皮の名前が"人狼の痕跡"なら{}の中を実行する
