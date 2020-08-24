@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class PluginConfig {
   public static FileConfiguration config;
   // private static JavaPlugin plugin;
-  public PluginConfig(JavaPlugin plugin) {
+  public static void InitConfig(JavaPlugin plugin) {
     // PluginConfig.plugin = plugin;
     // config.ymlが存在しない場合はファイルに出力します。
     plugin.saveDefaultConfig();
