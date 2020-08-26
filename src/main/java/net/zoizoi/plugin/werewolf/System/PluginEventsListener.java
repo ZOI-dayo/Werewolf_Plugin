@@ -31,6 +31,7 @@ public class PluginEventsListener implements Listener {
     public void FoodLevelChangeEvent(FoodLevelChangeEvent e) {
         if (e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
+            if (!SubCommandMaster.gameManager.isHosted) return;
             if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).getPlayers().containsKey(player)) {
                 e.setCancelled(true);
             }

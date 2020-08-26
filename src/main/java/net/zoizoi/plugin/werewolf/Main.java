@@ -7,11 +7,11 @@ import net.zoizoi.plugin.werewolf.System.PluginTabCompleter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
-  // public FileConfiguration config;
+    // public FileConfiguration config;
 
-  @Override
-  public void onEnable() {
-    // Plugin 読み込み時の処理
+    @Override
+    public void onEnable() {
+        // Plugin 読み込み時の処理
 
     /*
     // config.ymlが存在しない場合はファイルに出力します。
@@ -20,26 +20,27 @@ public final class Main extends JavaPlugin {
     config = getConfig();
 
      */
-    new PluginConfig(this);
+        // new PluginConfig(this);
+        PluginConfig.InitConfig(this);
 
-    // コンソールに出力
-    getLogger().info("WereWolf Pluginが読み込まれました");
-    // wolfコマンドをどこで処理するかSpigotに教える この場合CommandMaster
-    getCommand("wolf").setExecutor(new CommandMaster(this));
-    // wolfコマンドのTabキーでの補完をどこで処理するかSpigotに教える この場合PluginTabCompleter
-    getCommand("wolf").setTabCompleter(new PluginTabCompleter(this));
-    //getCommand("wolf").setTabCompleter(this); // バックアップ
-    // マイクラ内でのイベントをどこで処理するかSpigotに教える この場合GameJudge
-    getServer().getPluginManager().registerEvents(new PluginEventsListener(this), this);
-    // getServer().getPluginManager().registerEvents(new GameJudge(this), this);
-  }
+        // コンソールに出力
+        getLogger().info("WereWolf Pluginが読み込まれました");
+        // wolfコマンドをどこで処理するかSpigotに教える この場合CommandMaster
+        getCommand("wolf").setExecutor(new CommandMaster(this));
+        // wolfコマンドのTabキーでの補完をどこで処理するかSpigotに教える この場合PluginTabCompleter
+        getCommand("wolf").setTabCompleter(new PluginTabCompleter(this));
+        //getCommand("wolf").setTabCompleter(this); // バックアップ
+        // マイクラ内でのイベントをどこで処理するかSpigotに教える この場合GameJudge
+        getServer().getPluginManager().registerEvents(new PluginEventsListener(this), this);
+        // getServer().getPluginManager().registerEvents(new GameJudge(this), this);
+    }
 
-  @Override
-  public void onDisable() {
-    // Plugin 終了時の処理
-    getLogger().info("プラグインが無効になったよ!");
-  }
-  // net.zoizoi.plugin.werewolf.System.PluginTabCompleterへ移転
+    @Override
+    public void onDisable() {
+        // Plugin 終了時の処理
+        getLogger().info("プラグインが無効になったよ!");
+    }
+    // net.zoizoi.plugin.werewolf.System.PluginTabCompleterへ移転
   /*
   @Override
   // Tabキーでの補完処理
