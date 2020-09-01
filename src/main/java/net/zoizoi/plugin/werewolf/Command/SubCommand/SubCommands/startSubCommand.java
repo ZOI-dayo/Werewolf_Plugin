@@ -59,6 +59,7 @@ public class startSubCommand {
 
                 for (GamePlayer gp : gameManager.getGame(GameID).getPlayers().values()) {
                     Player p = gp.getPlayer();
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,400,1));
                     ScoreboardUtils.createPersonalScoreboard(p,"人狼ゲーム");
 
                     ArrayList<String> value = new ArrayList<String>(Arrays.asList("あなたの役職", gp.getJob().getJobNameJapanese()));

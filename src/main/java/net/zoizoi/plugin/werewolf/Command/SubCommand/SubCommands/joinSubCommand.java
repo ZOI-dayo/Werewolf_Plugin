@@ -9,6 +9,8 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class joinSubCommand {
     public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID) {
@@ -16,6 +18,11 @@ public class joinSubCommand {
             if (gameManager.getGame(GameID).AddPlayer(player)) {
                 for (Player p : player.getWorld().getPlayers()) {
                     p.sendMessage(ChatColor.YELLOW + "ゲームに" + player.getName() + "さんが参加しました");
+                }
+                for (PotionEffect PE :
+                        player.getActivePotionEffects()) {
+                    PotionEffectType PET = PE.getType();
+                    player.removePotionEffect(PET);
                 }
                 player.getInventory().clear();
                 player.sendMessage("人狼ゲームに参加しました");
