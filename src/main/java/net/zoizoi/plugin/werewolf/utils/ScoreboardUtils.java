@@ -19,7 +19,8 @@ public class ScoreboardUtils {
         Scoreboard scoreboard;
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         Objective objective = scoreboard.registerNewObjective(player.getUniqueId().toString().substring(0, 16), "dummy", displayName);
-        scoreboard.registerNewTeam(player.getUniqueId().toString().substring(0, 16));
+        Team team = scoreboard.registerNewTeam(player.getUniqueId().toString().substring(0, 16));
+        team.setCanSeeFriendlyInvisibles(false);
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         scoreboards.put(player.getUniqueId(), scoreboard);
     }
