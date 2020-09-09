@@ -46,25 +46,15 @@ public class PluginEventsListener implements Listener {
         //plugin.getLogger().info("PluginIventsListener: 45");
         // コンパスを持っているなら{}の中を実行する
         //plugin.getLogger().info("PluginIventsListener: 47: " + item.getType().name());
-        if (item.getType() == Material.COMPASS) {
-            plugin.getLogger().info("PluginIventsListener: 48");
-            // そのウサギの皮の名前が"人狼の痕跡"なら{}の中を実行する
-            plugin.getLogger().info("PluginIventsListener: 51: " + item.getItemMeta().getDisplayName());
-            if (item.getItemMeta().getDisplayName().equals("人狼の痕跡")) {
-                plugin.getLogger().info("PluginIventsListener: 51");
-                // 右クリックのイベントの場合(左クリックなどを除く)
-                plugin.getLogger().info("PluginIventsListener: 53");
-                plugin.getLogger().info("PluginIventsListener: 56: " + e.getAction().name());
-                if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    plugin.getLogger().info("PluginIventsListener: 55");
+        // 右クリックのイベントの場合(左クリックなどを除く)
+        if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if (item.getType() == Material.COMPASS) {
+                // そのウサギの皮の名前が"人狼の痕跡"なら{}の中を実行する
+                if (item.getItemMeta().getDisplayName().equals("人狼の痕跡")) {
                     // つまり人狼の痕跡を持ち、右クリックされたとき
                     GameManager gameManager = SubCommandMaster.gameManager;
                     for (GamePlayer gamePlayer : gameManager.getGame(SubCommandMaster.GameID).getPlayers().values()) {
-                        plugin.getLogger().info("PluginIventsListener: 62: " + gamePlayer.getPlayer().getName());
-                        plugin.getLogger().info("PluginIventsListener: 59");
-                        plugin.getLogger().info("PluginIventsListener: 64: " + gamePlayer.getJob().getJobName());
                         if (gamePlayer.getJob().getJobName() == "Werewolf") {
-                            plugin.getLogger().info("PluginIventsListener: 61");
                             /*
                             p.sendMessage(gamePlayer.getPlayer().getDisplayName() + "さんは人狼です!");
                             p.getInventory().setItemInMainHand(null);
@@ -75,7 +65,7 @@ public class PluginEventsListener implements Listener {
                         }
                     }
                 }
-            }
+            }else if(item.getType() == Material.XXX){}
         }
     }
 }
