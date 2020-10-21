@@ -34,11 +34,13 @@ public class startSubCommand {
     public int leftTime = 20;
 
     public boolean OnCommand(Player player, Command command, String label, String[] args, Main plugin, GameManager gameManager, int GameID) {
+        gameManager.getGame(GameID).isRunning = true;
         // 0~4秒後
         Runnable StartCountDown = new Runnable() {
             @Override
             public void run() {
-                for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+                for (UUID uuid : gameManager.getGame(GameID).getPlayers().keySet()) {
+                    Player p = plugin.getServer().getPlayer(uuid);
                     p.playSound(p.getLocation(), Sound.BLOCK_LEVER_CLICK, 1, 1);
                     p.sendMessage(StartCountDownTime + "秒前...");
                     p.sendTitle(StartCountDownTime + "秒前", "", 10, 20, 10);
@@ -56,17 +58,26 @@ public class startSubCommand {
                 StartItems startItems = new StartItems();
                 startItems.GiveItems(plugin, player, gameManager, GameID);
                 // net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.Start.StartItems へ移転
-
+                ArrayList<GamePlayer> Werewolfs = new ArrayList<>();
+                for (GamePlayer gp : gameManager.getGame(GameID).getPlayers().values()) {
+                    if(gp.getJob() == Job.Werewolf){
+                        Werewolfs.add(gp);
+                    }
+                }
                 for (GamePlayer gp : gameManager.getGame(GameID).getPlayers().values()) {
                     Player p = gp.getPlayer();
                     p.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,400,1));
-                    ScoreboardUtils.createPersonalScoreboard(p,"人狼ゲーム");
+                    ScoreboardUtils.createPersonalScoreboard(p,"あなたの役職:"+gp.getJob().getJobNameJapanese());
 
-                    ArrayList<String> value = new ArrayList<String>(Arrays.asList("あなたの役職", gp.getJob().getJobNameJapanese()));
-                    value.add(" ");
-                    value.add("参加者");
-                    for (Player pl : gameManager.getGame(GameID).getPlayers().keySet()) {
-                        value.add(pl.getName());
+                    ArrayList<String> value = new ArrayList<>();
+                    value.add("---参加者---");
+                    for (UUID uuid : gameManager.getGame(GameID).getPlayers().keySet()) {
+                        Player pl = plugin.getServer().getPlayer(uuid);
+                        if(gp.getJob() == Job.Werewolf && Werewolfs.contains(pl)){
+                            value.add(ChatColor.RED + pl.getName());
+                        }else{
+                            value.add(pl.getName());
+                        }
                     }
                     // value.add(" ");
                     // value.add(PluginConfig.config.getString("japanese.jobsExp." + gameManager.getGame(GameID).getPlayers().get(p).getJob().getJobName()));
@@ -75,15 +86,11 @@ public class startSubCommand {
 
                     ScoreboardUtils.showPersonalScoreboard(p);
                 }
-                ArrayList<GamePlayer> Werewolfs = new ArrayList<>();
-                for (GamePlayer gp : gameManager.getGame(GameID).getPlayers().values()) {
-                    if(gp.getJob() == Job.Werewolf){
-                        Werewolfs.add(gp);
-                    }
-                }
+
+                /*
                 for(GamePlayer gp : Werewolfs){
                     Player p = gp.getPlayer();
-                    ArrayList<String> value = new ArrayList<String>();
+                    ArrayList<String> value = new ArrayList<>();
                     value.add(" ");
                     value.add("人狼一覧:");
                     Werewolfs.forEach(gamePlayer -> {
@@ -93,12 +100,14 @@ public class startSubCommand {
                     ScoreboardUtils.editPersonalScoreboard(p,value);
                     ScoreboardUtils.showPersonalScoreboard(p);
                 }
+                */
             }
         }, (5 * 20));
 
         // 無敵時間
         BossBar invincibleTime = plugin.getServer().createBossBar("無敵時間", BarColor.RED, BarStyle.SOLID);
-        for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+        for (UUID uuid : gameManager.getGame(GameID).getPlayers().keySet()) {
+            Player p = plugin.getServer().getPlayer(uuid);
             invincibleTime.addPlayer(p);
         }
         Runnable TimeCount = new Runnable() {

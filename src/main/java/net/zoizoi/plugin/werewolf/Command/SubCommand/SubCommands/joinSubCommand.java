@@ -24,6 +24,8 @@ public class joinSubCommand {
                     PotionEffectType PET = PE.getType();
                     player.removePotionEffect(PET);
                 }
+                player.setPlayerListName("");
+
                 player.getInventory().clear();
                 player.sendMessage("人狼ゲームに参加しました");
                 TextUtils.sendHoverText(player, ChatColor.RED + "＞＞＞このメッセージを押してキャンセル＜＜＜", "人狼ゲームから離脱する", "/wolf cancel");

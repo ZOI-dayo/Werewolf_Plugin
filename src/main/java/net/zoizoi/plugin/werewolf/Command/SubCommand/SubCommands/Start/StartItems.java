@@ -17,9 +17,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class StartItems {
     public void GiveItems(Main plugin, Player player, GameManager gameManager, int GameID) {
@@ -30,7 +28,9 @@ public class StartItems {
                 PluginConfig.config.getDouble("Location.gameStage.y"),
                 PluginConfig.config.getDouble("Location.gameStage.z"));
         // ゲームに参加しているプレイヤー全員に対して
-        for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+        for (UUID uuid : gameManager.getGame(GameID).getPlayers().keySet()) {
+            Player p = plugin.getServer().getPlayer(uuid);
+
             Inventory inventory = p.getInventory();
             inventory.clear();
             // 弓
@@ -114,15 +114,32 @@ public class StartItems {
         Potion_Blindness_Lingering.setItemMeta(Potion_Blindness_Lingering_Meta); // Set Meta
         RundomItems.add(Potion_Blindness_Lingering);
         //
+        List<Player> shuffledPlayerList = new ArrayList<>(/*Arrays.asList((Player[]) gameManager.getGame(GameID).getPlayers().keySet().stream().map(uuid -> plugin.getServer().getPlayer(uuid)).toArray())*/); //TODO ERROR
+        for (UUID uuid : gameManager.getGame(GameID).getPlayers().keySet()) {
+            shuffledPlayerList.add(plugin.getServer().getPlayer(uuid));
+        }
+        /*
 
-        List<Player> shuffledPlayerList = new ArrayList<Player>(gameManager.getGame(GameID).getPlayers().keySet());
+[23:04:06] [Server thread/WARN]: [WereWolf] Task #33 for WereWolf v1.0-SNAPSHOT generated an exception
+java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Lorg.bukkit.entity.Player;
+	at net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.Start.StartItems.GiveItems(StartItems.java:118) ~[?:?]
+	at net.zoizoi.plugin.werewolf.Command.SubCommand.SubCommands.startSubCommand$2.run(startSubCommand.java:59) ~[?:?]
+	at org.bukkit.craftbukkit.v1_15_R1.scheduler.CraftTask.run(CraftTask.java:81) ~[spigot-1.15.2.jar:git-Spigot-a99063f-be6aaf0]
+	at org.bukkit.craftbukkit.v1_15_R1.scheduler.CraftScheduler.mainThreadHeartbeat(CraftScheduler.java:400) [spigot-1.15.2.jar:git-Spigot-a99063f-be6aaf0]
+	at net.minecraft.server.v1_15_R1.MinecraftServer.b(MinecraftServer.java:1036) [spigot-1.15.2.jar:git-Spigot-a99063f-be6aaf0]
+	at net.minecraft.server.v1_15_R1.DedicatedServer.b(DedicatedServer.java:406) [spigot-1.15.2.jar:git-Spigot-a99063f-be6aaf0]
+	at net.minecraft.server.v1_15_R1.MinecraftServer.a(MinecraftServer.java:984) [spigot-1.15.2.jar:git-Spigot-a99063f-be6aaf0]
+	at net.minecraft.server.v1_15_R1.MinecraftServer.run(MinecraftServer.java:824) [spigot-1.15.2.jar:git-Spigot-a99063f-be6aaf0]
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_241]
+         */
         Collections.shuffle(shuffledPlayerList);
         for (int i = 0; i < shuffledPlayerList.size(); i++) {
             shuffledPlayerList.get(i).getInventory().addItem(RundomItems.get(i));
             // player.sendMessage("i : " + i + " , " + shuffledPlayerList.get(i).getName() + "に" + RundomItems.get(i) + "を与えました");
         }
         //
-        for (Player p : gameManager.getGame(GameID).getPlayers().keySet()) {
+        for (UUID uuid : gameManager.getGame(GameID).getPlayers().keySet()) {
+            Player p = plugin.getServer().getPlayer(uuid);
             p.sendTitle("開始", "ゲームが開始されました", 10, 50, 10);
             p.teleport(gameStage);
             p.playSound(p.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);

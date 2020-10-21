@@ -13,12 +13,12 @@ import java.util.*;
 
 public class Game {
     Main plugin;
-    private LinkedHashMap<Player, GamePlayer> playerList = new LinkedHashMap<Player, GamePlayer>();
+    private LinkedHashMap<UUID, GamePlayer> playerList = new LinkedHashMap<>();
     private LinkedHashMap<GamePlayer, Job> jobPlayerList = new LinkedHashMap<>();
     private String Result;
-    private LinkedHashMap<Player, GamePlayer> villagePlayerList = new LinkedHashMap<Player, GamePlayer>();
-    private LinkedHashMap<Player, GamePlayer> wolfPlayerList = new LinkedHashMap<Player, GamePlayer>();
-    private LinkedHashMap<Player, GamePlayer> betrayerPlayerList = new LinkedHashMap<Player, GamePlayer>();
+    private LinkedHashMap<UUID, GamePlayer> villagePlayerList = new LinkedHashMap<>();
+    private LinkedHashMap<UUID, GamePlayer> wolfPlayerList = new LinkedHashMap<>();
+    private LinkedHashMap<UUID, GamePlayer> betrayerPlayerList = new LinkedHashMap<>();
 
     public boolean isCreated = false;
     public boolean isReady = false;
@@ -33,7 +33,7 @@ public class Game {
 
     public boolean AddPlayer(Player player) {
         plugin.getLogger().info("Add Player : " + player.getName());
-        if (playerList.containsKey(player)) {
+        if (playerList.containsKey(player.getUniqueId())) {
             // 既に含まれている場合
             return false;
         } else {
@@ -42,8 +42,8 @@ public class Game {
                 p.sendMessage("ゲームに" + player.getName() + "さんが参加しました");
             }
              */
-            GamePlayer gamePlayer = new GamePlayer(plugin, player);
-            playerList.put(player, gamePlayer);
+            GamePlayer gamePlayer = new GamePlayer(plugin, player.getUniqueId());
+            playerList.put(player.getUniqueId(), gamePlayer);
             return true;
         }
     }
@@ -58,14 +58,17 @@ public class Game {
     }
 
 
-    public HashMap<Player, GamePlayer> getPlayers() {
+    public HashMap<UUID, GamePlayer> getPlayers() {
         return playerList;
+    }
+    public boolean isContains(UUID uuid){
+        return playerList.containsKey(uuid);
     }
 
     public void Start(Main plugin) {
-        isRunning = true;
+        // isRunning = true;
 
-        List<Player> shuffledPlayerList = new ArrayList<Player>(playerList.keySet());
+        List<UUID> shuffledPlayerList = new ArrayList<>(playerList.keySet());
         Collections.shuffle(shuffledPlayerList);
 
         for (int i = 0; i < shuffledPlayerList.size(); i++) {
@@ -102,29 +105,29 @@ public class Game {
             }
 
             playerList.get(shuffledPlayerList.get(i)).setJob(job);
-            shuffledPlayerList.get(i).sendTitle("ゲームが開始されました", "あなたは" + job.getJobNameJapanese() + "です", 10, 50, 10);
-            shuffledPlayerList.get(i).sendMessage("ゲームが開始されました");
-            shuffledPlayerList.get(i).sendMessage("あなたは " + job.getJobNameJapanese() + " です");
+            plugin.getServer().getPlayer(shuffledPlayerList.get(i)).sendTitle("ゲームが開始されました", "あなたは" + job.getJobNameJapanese() + "です", 10, 50, 10);
+            plugin.getServer().getPlayer(shuffledPlayerList.get(i)).sendMessage("ゲームが開始されました");
+            plugin.getServer().getPlayer(shuffledPlayerList.get(i)).sendMessage("あなたは " + job.getJobNameJapanese() + " です");
             jobPlayerList.put(playerList.get(shuffledPlayerList.get(i)), job);
         }
 
     }
 
     public boolean PlayerDie(Player player) {
-        GamePlayer gamePlayer = playerList.get(player);
+        GamePlayer gamePlayer = playerList.get(player.getUniqueId());
 
         gamePlayer.setLife(false);
         switch (gamePlayer.getJob().getJobName()) {
             case "Citizen":
             case "Prophet":
             case "Necromancer":
-                villagePlayerList.remove(player);
+                villagePlayerList.remove(player.getUniqueId());
                 break;
             case "Werewolf":
-                wolfPlayerList.remove(player);
+                wolfPlayerList.remove(player.getUniqueId());
                 break;
             case "Betrayer":
-                betrayerPlayerList.remove(player);
+                betrayerPlayerList.remove(player.getUniqueId());
                 break;
             default:
                 plugin.getLogger().info("130: Default");

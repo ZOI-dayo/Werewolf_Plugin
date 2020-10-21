@@ -8,6 +8,8 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import java.util.UUID;
+
 public class GameJudge{
   private Main plugin;
   private GameManager gameManager;
@@ -25,7 +27,10 @@ public class GameJudge{
       Player death = e.getEntity();
       if (gameManager.getGame(GameID).PlayerDie(death)) {
         gameManager.getGame(GameID).Stop();
-        for (Player player : gameManager.getGame(GameID).getPlayers().keySet()) {
+        for (UUID uuid : gameManager.getGame(GameID).getPlayers().keySet()) {
+          Player player = plugin.getServer().getPlayer(uuid);
+          player.setPlayerListName(player.getName());
+
           ScoreboardUtils.deletePersonalScoreboard(player);
           player.getInventory().clear();
 
@@ -39,7 +44,8 @@ public class GameJudge{
           player.sendMessage("");
           player.sendMessage("今回の役職配分");
           player.sendMessage("");
-          for (Player keyPlayer : gameManager.getGame(GameID).getPlayers().keySet()) {
+          for (UUID uuid1 : gameManager.getGame(GameID).getPlayers().keySet()) {
+            Player keyPlayer = plugin.getServer().getPlayer(uuid);
             GamePlayer gamePlayer = gameManager.getGame(GameID).getPlayers().get(keyPlayer);
             player.sendMessage(keyPlayer.getName() + " : " + gamePlayer.getJob().getJobNameJapanese());
           }

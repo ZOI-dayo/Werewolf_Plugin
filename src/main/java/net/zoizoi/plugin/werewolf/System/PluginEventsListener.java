@@ -23,8 +23,11 @@ public class PluginEventsListener implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
+        if(!SubCommandMaster.gameManager.isHosted) return;
+        if(SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isRunning){
         GameJudge gameJudge = new GameJudge(plugin);
-        gameJudge.onDeath(e);
+            gameJudge.onDeath(e);
+        }
     }
 
     @EventHandler
@@ -65,7 +68,8 @@ public class PluginEventsListener implements Listener {
                         }
                     }
                 }
-            }else if(item.getType() == Material.XXX){}
+            }
+//            else if(item.getType() == Material.XXX){}
         }
     }
 }

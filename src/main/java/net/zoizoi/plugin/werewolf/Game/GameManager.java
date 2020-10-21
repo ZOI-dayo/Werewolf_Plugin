@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class GameManager {
     Main plugin;
@@ -35,7 +36,8 @@ public class GameManager {
     }
 
     public void DeleteGame(int ID) {
-        for (Player p : gameList.get(ID).getPlayers().keySet()) {
+        for (UUID uuid : gameList.get(ID).getPlayers().keySet()) {
+            Player p = plugin.getServer().getPlayer(uuid);
             p.setPlayerListName(p.getName());
         }
         gameList.remove(ID);

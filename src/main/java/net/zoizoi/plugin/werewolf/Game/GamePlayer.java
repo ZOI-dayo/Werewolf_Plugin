@@ -3,29 +3,32 @@ package net.zoizoi.plugin.werewolf.Game;
 import net.zoizoi.plugin.werewolf.Main;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 public class GamePlayer {
     Main plugin;
-    private org.bukkit.entity.Player player;
+    // private org.bukkit.entity.Player player;
+    private UUID uuid;
     private boolean life = true;
     private Job job;
     private boolean isWorked = false;
 
-    public GamePlayer(Main plugin, Player player, Boolean life, Job job) {
+    public GamePlayer(Main plugin, UUID uuid, Boolean life, Job job) {
         this.plugin = plugin;
-        this.player = player;
+        this.uuid = uuid;
         this.life = life;
         this.job = job;
     }
 
-    public GamePlayer(Main plugin, Player player) {
+    public GamePlayer(Main plugin, UUID uuid) {
         this.plugin = plugin;
-        this.player = player;
+        this.uuid = uuid;
         this.life = true;
         this.job = Job.Citizen;
     }
 
     public org.bukkit.entity.Player getPlayer() {
-        return this.player;
+        return plugin.getServer().getPlayer(uuid);
     }
 
     public void setLife(boolean life) {
