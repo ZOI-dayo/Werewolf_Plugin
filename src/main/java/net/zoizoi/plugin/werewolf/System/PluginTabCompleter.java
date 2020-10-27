@@ -36,21 +36,21 @@ public class PluginTabCompleter implements TabCompleter {
         if (SubCommandMaster.gameManager.isHosted) {
           if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isRunning) { // ゲーム中の場合
             // 候補に job,reset,work を追加
-            commands = new ArrayList<>(Arrays.asList("job", "reset", "work"));
+            commands = new ArrayList<>(Arrays.asList("job", "work"));
           } else if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isStopped) { // 終了後の場合
             // 候補に reset を追加
             commands = new ArrayList<>(Arrays.asList("reset"));
           } else if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).isReady) { // Ready後&ゲーム前 の場合
             // 候補に start,reset を追加
-            commands = new ArrayList<>(Arrays.asList("start", "reset"));
+            commands = new ArrayList<>(Arrays.asList("start"));
           } else if (SubCommandMaster.gameManager.isHosted) { // Host後&Ready前 の場合
             // コマンドを打っている人がゲームに参加している場合
-            if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).getPlayers().containsKey(player)) {
+            if (SubCommandMaster.gameManager.getGame(SubCommandMaster.GameID).getPlayers().containsKey(player.getUniqueId())) {
               // 候補に cancel,ready,reset を追加
-              commands = new ArrayList<>(Arrays.asList("cancel", "ready", "reset"));
+              commands = new ArrayList<>(Arrays.asList("cancel", "ready"));
             } else { // コマンドを打っている人がゲームに参加していない場合
               // 候補に join,ready,reset を追加
-              commands = new ArrayList<>(Arrays.asList("join", "ready", "reset"));
+              commands = new ArrayList<>(Arrays.asList("join", "ready"));
             }
           } else { // どれでもない場合(エラーになるかもしれないから一応置いてるけど多分いらない)
             // 候補に host を追加
