@@ -17,12 +17,25 @@ public class SubCommandMaster {
     }
 
     public boolean OnCommand(Player player, Command command, String label, String[] args) {
+	if (!(player.hasPermission("wolf."+args[0].toString().toLowerCase()))) {
+	    player.sendMessage("権限がありません!!");
+	    return true;
+	}
+
         if (args[0].equals("host")) {
 
-            hostSubCommand host = new hostSubCommand();
-            return host.OnCommand(player, command, label, args, plugin, gameManager, GameID);
+	    hostSubCommand host = new hostSubCommand();
+	    return host.OnCommand(player, command, label, args, plugin, gameManager, GameID);
 
-        } else if (args[0].equals("join")) {
+        } else if (args[0].equals("reloadConfig")) {
+
+            reloadConfigSubCommand reloadConfig = new reloadConfigSubCommand();
+            return reloadConfig.OnCommand(player, plugin);
+	} else if (gameManager.getGame(GameID) == null) {
+
+	    player.sendMessage("ゲームが準備されていません");
+	    return true;
+	} else if (args[0].equals("join")) {
 
             joinSubCommand join = new joinSubCommand();
             return join.OnCommand(player, command, label, args, plugin, gameManager, GameID);
@@ -56,10 +69,6 @@ public class SubCommandMaster {
 
             workSubCommand work = new workSubCommand();
             return work.OnCommand(player, command, label, args, plugin, gameManager, GameID);
-        } else if (args[0].equals("reloadConfig")) {
-
-            reloadConfigSubCommand reloadConfig = new reloadConfigSubCommand();
-            return reloadConfig.OnCommand(player, plugin);
         } else if (args[0].equals("waiter")) {
             // Waiterテスト用
             /*
