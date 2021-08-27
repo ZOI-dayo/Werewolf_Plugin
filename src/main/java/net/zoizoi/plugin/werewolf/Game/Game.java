@@ -133,7 +133,7 @@ public class Game {
                 plugin.getLogger().info("130: Default");
                 break;
         }
-        if (villagePlayerList.size() == 0) {
+        if (villagePlayerList.size() <= wolfPlayerList.size()) {
             this.Result = "Wolf";
             return true;
         } else if (wolfPlayerList.size() == 0) {
