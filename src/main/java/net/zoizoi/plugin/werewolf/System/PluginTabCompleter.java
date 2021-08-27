@@ -67,7 +67,7 @@ public class PluginTabCompleter implements TabCompleter {
         // 実際に表示するものを入れる「リスト」 String型の変数をいっぱい入れられる
         List<String> Answer = new ArrayList<>();
         // デバッグ用、いらない
-        plugin.getLogger().info("" + args.length);
+        //plugin.getLogger().info("" + args.length);
         // /wolf の後、スペースがある時
         // つまり"/wolf "とか"/wolf h"とかの時。
         if (args.length == 1) {
@@ -88,7 +88,7 @@ public class PluginTabCompleter implements TabCompleter {
           // XXXが"work"のとき
           if (args[0].equals("work")) {
             // デバッグ用、いらない
-            plugin.getLogger().info("null!!!!!!!");
+            //plugin.getLogger().info("null!!!!!!!");
             // Spigotに任せる。(プレイヤー名の一覧が出る)
             return null;
           } else { // XXXが"work"でない時
