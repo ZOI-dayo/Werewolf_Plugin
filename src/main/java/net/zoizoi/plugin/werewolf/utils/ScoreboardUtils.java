@@ -1,4 +1,5 @@
 package net.zoizoi.plugin.werewolf.utils;
+import net.zoizoi.plugin.werewolf.System.PluginConfig;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -21,6 +22,14 @@ public class ScoreboardUtils {
         Objective objective = scoreboard.registerNewObjective(player.getUniqueId().toString().substring(0, 16), "dummy", displayName);
         Team team = scoreboard.registerNewTeam(player.getUniqueId().toString().substring(0, 16));
         team.setCanSeeFriendlyInvisibles(false);
+
+	// hide NameTag
+	if (PluginConfig.config.getBoolean("hideNameTag") == false) {
+	    team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.ALWAYS);
+	} else {
+	    team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
+	}
+
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         scoreboards.put(player.getUniqueId(), scoreboard);
     }
