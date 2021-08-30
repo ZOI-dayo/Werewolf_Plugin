@@ -1,5 +1,9 @@
+# true にするとネームタグが消せます
 hideNameTag: true
+
+# wolfmajority を指定すると、終了判定が 村人+狂人<=人狼 になります
 judgerule: wolfmajority
+
 japanese:
   jobs:
     Citizen: 市民
