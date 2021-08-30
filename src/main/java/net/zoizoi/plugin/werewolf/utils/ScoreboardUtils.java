@@ -60,20 +60,4 @@ public class ScoreboardUtils {
         scoreboards.put(player.getUniqueId(), scoreboard);
         player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
     }
-
-    public static void hideNameTag (Player player, Boolean hide) {
-	Scoreboard tagboard = Bukkit.getScoreboardManager().getMainScoreboard();
-	if (tagboard.getTeam("invisibleteam") == null)
-	    tagboard.registerNewTeam("invisibleteam");
-	Team tagteam = tagboard.getTeam("invisibleteam");
-	tagteam.setCanSeeFriendlyInvisibles(false);
-	if (hide == false) {
-	    tagteam.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.ALWAYS);
-	} else {
-	    tagteam.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
-	}
-	tagteam.addEntry(player.getName());
-	player.setScoreboard(tagboard);
-    }
 }
-
