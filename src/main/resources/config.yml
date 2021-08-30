@@ -1,4 +1,5 @@
 hideNameTag: true
+judgerule: wolfmajority
 japanese:
   jobs:
     Citizen: 市民
