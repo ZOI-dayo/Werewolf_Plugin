@@ -85,7 +85,10 @@ public class startSubCommand {
                     ScoreboardUtils.editPersonalScoreboard(p,value);
 
                     ScoreboardUtils.showPersonalScoreboard(p);
-                }
+
+                    // hide NameTag
+		    ScoreboardUtils.hideNameTag(p, PluginConfig.config.getBoolean("hideNameTag"));
+		}
 
                 /*
                 for(GamePlayer gp : Werewolfs){
