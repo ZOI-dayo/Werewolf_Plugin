@@ -9,6 +9,7 @@ import net.zoizoi.plugin.werewolf.Main;
 import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import net.zoizoi.plugin.werewolf.utils.ItemUtils;
 import net.zoizoi.plugin.werewolf.utils.ScoreboardUtils;
+import net.zoizoi.plugin.werewolf.utils.NameTag;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -87,7 +88,7 @@ public class startSubCommand {
                     ScoreboardUtils.showPersonalScoreboard(p);
 
                     // hide NameTag
-		    ScoreboardUtils.hideNameTag(p, PluginConfig.config.getBoolean("hideNameTag"));
+		    NameTag.hideNameTag(p, PluginConfig.config.getBoolean("hideNameTag"));
 		}
 
                 /*
