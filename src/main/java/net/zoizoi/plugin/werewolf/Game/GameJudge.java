@@ -7,6 +7,7 @@ import net.zoizoi.plugin.werewolf.utils.ScoreboardUtils;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.ChatColor;
 
 import java.util.UUID;
 
@@ -45,7 +46,13 @@ public class GameJudge{
           player.sendMessage("今回の役職配分");
           player.sendMessage("");
           for (UUID uuid1 : gameManager.getGame(GameID).getPlayers().keySet()) {
-	      player.sendMessage(plugin.getServer().getPlayer(uuid).getName() + " : " + gameManager.getGame(GameID).getPlayers().get(uuid1).getJob().getJobNameJapanese());
+	      Player p = plugin.getServer().getPlayer(uuid1);
+	      GamePlayer gp = gameManager.getGame(GameID).getPlayers().get(uuid1);
+	      if (gp.getLife()) {
+		  player.sendMessage(ChatColor.GREEN + "(生)" + p.getName() + ChatColor.RESET + " : " + gp.getJob().getJobNameJapanese());
+	      } else {
+		  player.sendMessage(ChatColor.RED + "(死)" + p.getName() + ChatColor.RESET + " : " + gp.getJob().getJobNameJapanese());
+	      }
           }
           player.sendMessage("");
           // 花火を打ち上げる
