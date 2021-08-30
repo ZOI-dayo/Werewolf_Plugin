@@ -32,11 +32,6 @@ public class GameJudge{
           Player player = plugin.getServer().getPlayer(uuid);
           player.setPlayerListName(player.getName() + "");
 
-          ScoreboardUtils.deletePersonalScoreboard(player);
-          player.getInventory().clear();
-
-          player.setGameMode(GameMode.SPECTATOR);
-
           plugin.getLogger().info(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()));
           player.sendTitle(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);
           player.sendMessage("+-----------+");
@@ -55,6 +50,12 @@ public class GameJudge{
 	      }
           }
           player.sendMessage("");
+
+	  ScoreboardUtils.deletePersonalScoreboard(player);
+
+          player.getInventory().clear();
+          player.setGameMode(GameMode.SPECTATOR);
+
           // 花火を打ち上げる
           /*
           for (int i = 0; i < 10; i++) {
@@ -72,6 +73,9 @@ public class GameJudge{
           }
           //*/
         }
+
+	gameManager.DeleteGame(GameID);
+
       } else {
         /*
         Location quitLobby = new Location(death.getWorld(),
@@ -81,9 +85,11 @@ public class GameJudge{
         death.teleport(quitLobby);
          */
         // WaiterMode.setWaiter(plugin, death.getUniqueId(), true);
-        death.setGameMode(GameMode.SPECTATOR);
-        death.sendMessage("あなたは死にました");
-        death.sendMessage("DiscordのVCを切ってください");
+
+	  death.getInventory().clear();
+	  death.setGameMode(GameMode.SPECTATOR);
+	  death.sendMessage("あなたは死にました");
+	  death.sendMessage("DiscordのVCを切ってください");
       }
     }
   }
