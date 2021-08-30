@@ -9,7 +9,6 @@ import net.zoizoi.plugin.werewolf.Main;
 import net.zoizoi.plugin.werewolf.System.PluginConfig;
 import net.zoizoi.plugin.werewolf.utils.ItemUtils;
 import net.zoizoi.plugin.werewolf.utils.ScoreboardUtils;
-import net.zoizoi.plugin.werewolf.utils.NameTag;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -87,8 +86,7 @@ public class startSubCommand {
 
                     ScoreboardUtils.showPersonalScoreboard(p);
 
-                    // hide NameTag
-		    NameTag.hideNameTag(p, PluginConfig.config.getBoolean("hideNameTag"));
+
 		}
 
                 /*
@@ -142,11 +140,13 @@ public class startSubCommand {
                 ItemStack TraceOfWerewolf;
                 TraceOfWerewolf = ItemUtils.CreateItem(Material.COMPASS, 1); // ItemStack(Material.RABBIT_HIDE, 1);
                 ItemUtils.setName(TraceOfWerewolf, "人狼の痕跡");
-                for (GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()) {
-                    if (GamePlayer_Betrayer.getJob().getJobName() == "Betrayer") {
-                        Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();
-                        Player_Betrayer.getInventory().addItem(TraceOfWerewolf);
-                    }
+		if (gameManager.getGame(GameID) != null) {
+		    for (GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()) {
+			if (GamePlayer_Betrayer.getJob().getJobName() == "Betrayer") {
+			    Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();
+			    Player_Betrayer.getInventory().addItem(TraceOfWerewolf);
+			}
+		    }
                 }
                 /*
                 LinkedHashMap<GamePlayer, Job> jobPlayerList = gameManager.getGame(GameID).getJobPlayerList();
