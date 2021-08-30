@@ -85,8 +85,6 @@ public class startSubCommand {
                     ScoreboardUtils.editPersonalScoreboard(p,value);
 
                     ScoreboardUtils.showPersonalScoreboard(p);
-
-
 		}
 
                 /*
