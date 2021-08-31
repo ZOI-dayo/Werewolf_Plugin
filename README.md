@@ -12,6 +12,9 @@ YoutubeでMinecraftなどを実況している「○○の主役は我々だ」�
 2. pluginsフォルダの中へWereWolf-○○.jarを入れます
 3. 一度サーバーを起動し、また終了します
 4. plugins/WereWolf/config.yml を必要に応じて編集してください
+5. wolf.*でpermissionを設定できます。
+   defaultでwolf.join, wolf.cancel, wolf.job, wolf.workがtrueになっています。
+   opは追加でwolf.host, wolf.reloadConfig, wolf.ready, wolf.start, wolf.resetもtrueになります。
 
 ### ゲーム開始前にしておくべきこと
 
