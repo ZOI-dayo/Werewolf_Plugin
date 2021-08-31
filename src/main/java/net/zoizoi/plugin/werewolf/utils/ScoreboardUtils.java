@@ -24,10 +24,10 @@ public class ScoreboardUtils {
         team.setCanSeeFriendlyInvisibles(false);
 
 	// hide NameTag
-	if (PluginConfig.config.getBoolean("hideNameTag") == false) {
-	    team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.ALWAYS);
-	} else {
+	if (PluginConfig.config.getBoolean("hideNameTag")) {
 	    team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER);
+	} else {
+	    team.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.ALWAYS);
 	}
 
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
