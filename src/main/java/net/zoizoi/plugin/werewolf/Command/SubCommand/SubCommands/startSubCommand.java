@@ -138,11 +138,13 @@ public class startSubCommand {
                 ItemStack TraceOfWerewolf;
                 TraceOfWerewolf = ItemUtils.CreateItem(Material.COMPASS, 1); // ItemStack(Material.RABBIT_HIDE, 1);
                 ItemUtils.setName(TraceOfWerewolf, "人狼の痕跡");
-                for (GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()) {
-                    if (GamePlayer_Betrayer.getJob().getJobName() == "Betrayer") {
-                        Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();
-                        Player_Betrayer.getInventory().addItem(TraceOfWerewolf);
-                    }
+		if (gameManager.getGame(GameID) != null) {
+		    for (GamePlayer GamePlayer_Betrayer : gameManager.getGame(GameID).getPlayers().values()) {
+			if (GamePlayer_Betrayer.getJob().getJobName() == "Betrayer") {
+			    Player Player_Betrayer = GamePlayer_Betrayer.getPlayer();
+			    Player_Betrayer.getInventory().addItem(TraceOfWerewolf);
+			}
+		    }
                 }
                 /*
                 LinkedHashMap<GamePlayer, Job> jobPlayerList = gameManager.getGame(GameID).getJobPlayerList();

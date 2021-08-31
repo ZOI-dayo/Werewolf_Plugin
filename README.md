@@ -12,6 +12,9 @@ YoutubeでMinecraftなどを実況している「○○の主役は我々だ」�
 2. pluginsフォルダの中へWereWolf-○○.jarを入れます
 3. 一度サーバーを起動し、また終了します
 4. plugins/WereWolf/config.yml を必要に応じて編集してください
+5. wolf.*でpermissionを設定できます。
+   defaultでwolf.join, wolf.cancel, wolf.job, wolf.workがtrueになっています。
+   opは追加でwolf.host, wolf.reloadConfig, wolf.ready, wolf.start, wolf.resetもtrueになります。
 
 ### ゲーム開始前にしておくべきこと
 
@@ -45,7 +48,7 @@ YoutubeでMinecraftなどを実況している「○○の主役は我々だ」�
 
 ### 死んでしまった場合
 
-1. 死んでしまった場合、待機場所へ飛ばされます
+1. 死んでしまった場合、待機場所へ飛ばされます (※現状の動作は「リスポーン地点に戻る」です)
 2. DiscordのVCでミュートにしましょう。通話を切るのではなく、ミュートです
 3. Tabキーを押した時 死んでいるのがバレてしまうため、スペクテイターモードで観戦する事はできません
 
@@ -53,7 +56,7 @@ YoutubeでMinecraftなどを実況している「○○の主役は我々だ」�
 
 1. どちらかの陣営が全滅した場合、画面に大きく「○○陣営の勝利」と表示され、全員スペクテイターモードになります
 2. 役職一覧が表示されるので、結果を見ましょう
-3. 誰か一人がゲーム内で /wolf reset と実行することで、/wolf host 実行前の状態に戻ります
+3. 誰か一人がゲーム内で /wolf reset と実行することで、/wolf host 実行前の状態に戻ります (※現状は終了時に自動でresetされます)
 
 ## エラーが出た場合・バグを見つけた場合
 
@@ -136,7 +139,7 @@ DiscordのBotに関して : https://qiita.com/itsu_dev/items/825e4ed32bf32e4b64b
 
 ### 開始時
 
-- op : /wolf_start
+- op : /wolf start
 - チャット(player) : 人狼ゲームが開始されました
 - チャット(private) : あなたの役職は です
 - 画面(player) : 「人狼ゲーム 開始」

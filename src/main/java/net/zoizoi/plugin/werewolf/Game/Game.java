@@ -133,15 +133,24 @@ public class Game {
                 plugin.getLogger().info("130: Default");
                 break;
         }
-        if (villagePlayerList.size() == 0) {
-            this.Result = "Wolf";
-            return true;
-        } else if (wolfPlayerList.size() == 0) {
-            this.Result = "Village";
-            return true;
-        } else {
-            return false;
-        }
+	if (PluginConfig.config.getBoolean("wolfmajority")) {
+	    if (villagePlayerList.size() + betrayerPlayerList.size() <= wolfPlayerList.size()) {
+		this.Result = "Wolf";
+		return true;
+	    } else if (wolfPlayerList.size() == 0) {
+		this.Result = "Village";
+		return true;
+	    }
+	} else {
+	    if (villagePlayerList.size() == 0) {
+		this.Result = "Wolf";
+		return true;
+	    } else if (wolfPlayerList.size() == 0) {
+		this.Result = "Village";
+		return true;
+	    }
+	}
+	return false;
     }
 
     public void Stop() {

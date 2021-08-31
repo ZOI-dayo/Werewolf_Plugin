@@ -7,4 +7,46 @@ description: WereWolf Minigame Plugin
 commands:
   wolf:
     description: WereWolf Game Command
-    usage: /<command> [text]
+    usage: /<command> [subcommand]
+
+permissions:
+  wolf.*:
+    description: Werewolf op permission
+    default: op
+    children:
+      wolf.host: true
+      wolf.reloadConfig: true
+      wolf.ready: true
+      wolf.start: true
+      wolf.reset: true
+      wolf.join: true
+      wolf.cancel: true
+      wolf.job: true
+      wolf.work: true
+  wolf.host:
+    description: Werewolf host permission
+    default: op
+  wolf.reloadConfig:
+    description: Werewolf reloadConfig permission
+    default: op
+  wolf.ready:
+    description: Werewolf ready permission
+    default: op
+  wolf.start:
+    description: Werewolf start permission
+    default: op
+  wolf.reset:
+    description: Werewolf reset permission
+    default: op
+  wolf.join:
+    description: Werewolf join permission
+    default: true
+  wolf.cancel:
+    description: Werewolf cancel permission
+    default: true
+  wolf.job:
+    description: Werewolf job permission
+    default: true
+  wolf.work:
+    description: Werewolf work permission
+    default: true

@@ -7,6 +7,7 @@ import net.zoizoi.plugin.werewolf.utils.ScoreboardUtils;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.ChatColor;
 
 import java.util.UUID;
 
@@ -31,25 +32,30 @@ public class GameJudge{
           Player player = plugin.getServer().getPlayer(uuid);
           player.setPlayerListName(player.getName() + "");
 
-          ScoreboardUtils.deletePersonalScoreboard(player);
-          player.getInventory().clear();
-
-          player.setGameMode(GameMode.SPECTATOR);
-
           plugin.getLogger().info(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()));
           player.sendTitle(PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利", "", 10, 250, 10);
           player.sendMessage("+-----------+");
           player.sendMessage("| " + PluginConfig.config.getString("japanese.camp." + gameManager.getGame(GameID).getResult()) + "の勝利 |");
           player.sendMessage("+-----------+");
           player.sendMessage("");
-//          player.sendMessage("今回の役職配分");
-//          player.sendMessage("");
-//          for (UUID uuid1 : gameManager.getGame(GameID).getPlayers().keySet()) {
-//            Player keyPlayer = plugin.getServer().getPlayer(uuid);
-//            GamePlayer gamePlayer = gameManager.getGame(GameID).getPlayers().get(keyPlayer);
-//            player.sendMessage(keyPlayer.getName() + " : " + gamePlayer.getJob().getJobNameJapanese());
-//          }
-//          player.sendMessage("");
+          player.sendMessage("今回の役職配分");
+          player.sendMessage("");
+          for (UUID uuid1 : gameManager.getGame(GameID).getPlayers().keySet()) {
+	      Player p = plugin.getServer().getPlayer(uuid1);
+	      GamePlayer gp = gameManager.getGame(GameID).getPlayers().get(uuid1);
+	      if (gp.getLife()) {
+		  player.sendMessage(ChatColor.GREEN + "(生)" + p.getName() + ChatColor.RESET + " : " + gp.getJob().getJobNameJapanese());
+	      } else {
+		  player.sendMessage(ChatColor.RED + "(死)" + p.getName() + ChatColor.RESET + " : " + gp.getJob().getJobNameJapanese());
+	      }
+          }
+          player.sendMessage("");
+
+	  ScoreboardUtils.deletePersonalScoreboard(player);
+
+          player.getInventory().clear();
+          player.setGameMode(GameMode.SPECTATOR);
+
           // 花火を打ち上げる
           /*
           for (int i = 0; i < 10; i++) {
@@ -67,6 +73,9 @@ public class GameJudge{
           }
           //*/
         }
+
+	gameManager.DeleteGame(GameID);
+
       } else {
         /*
         Location quitLobby = new Location(death.getWorld(),
@@ -76,19 +85,12 @@ public class GameJudge{
         death.teleport(quitLobby);
          */
         // WaiterMode.setWaiter(plugin, death.getUniqueId(), true);
-        death.setGameMode(GameMode.SPECTATOR);
-        death.sendMessage("あなたは死にました");
-        death.sendMessage("DiscordのVCを切ってください");
-        death.sendMessage("今回の役職配分");
-        death.sendMessage("");
-        for (UUID uuid1 : gameManager.getGame(GameID).getPlayers().keySet()) {
-          Player keyPlayer = plugin.getServer().getPlayer(uuid1);
-          GamePlayer gamePlayer = gameManager.getGame(GameID).getPlayers().get(death.getUniqueId());
-          death.sendMessage(keyPlayer.getName() + " : " + gamePlayer.getJob().getJobNameJapanese());
-        }
-        death.sendMessage("");
+
+	  death.getInventory().clear();
+	  death.setGameMode(GameMode.SPECTATOR);
+	  death.sendMessage("あなたは死にました");
+	  death.sendMessage("DiscordのVCを切ってください");
       }
     }
   }
 }
-
