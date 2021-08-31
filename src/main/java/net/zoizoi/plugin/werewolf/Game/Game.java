@@ -133,7 +133,7 @@ public class Game {
                 plugin.getLogger().info("130: Default");
                 break;
         }
-	if (PluginConfig.config.getString("judgerule").equals("wolfmajority")) {
+	if (PluginConfig.config.getBoolean("wolfmajority")) {
 	    if (villagePlayerList.size() + betrayerPlayerList.size() <= wolfPlayerList.size()) {
 		this.Result = "Wolf";
 		return true;

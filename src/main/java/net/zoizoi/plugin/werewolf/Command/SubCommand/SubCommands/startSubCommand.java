@@ -85,7 +85,7 @@ public class startSubCommand {
                     ScoreboardUtils.editPersonalScoreboard(p,value);
 
                     ScoreboardUtils.showPersonalScoreboard(p);
-		}
+                }
 
                 /*
                 for(GamePlayer gp : Werewolfs){
