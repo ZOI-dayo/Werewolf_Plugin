@@ -1,5 +1,5 @@
 # true にするとネームタグが消せます
-hideNameTag: true
+hideNameTag: false
 
 # wolfmajority を trueにすると、終了判定が 村人+狂人<=人狼 になります
 wolfmajority: false
